@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -25,29 +26,67 @@ namespace LuckyDraw
 
             mListNumberBox = new List<NumberBox>();
 
-            mBgColor = Color.FromArgb(153, 158, 162);
+            mBgColor = Color.Transparent;
 
 
             for (int i = 0; i < numberOfBox; i++)
             {
                 Point p = new Point(200 * i, 0);
+                PointF margin = new PointF(30, 28);
 
-                NumberBox nb = new NumberBox(p);
+                NumberBox nb = new NumberBox(p, margin);
                 mListNumberBox.Add(nb);
             }
         }
 
-        public void update(Graphics g)
+        public void Draw(Graphics g)
         {
-            if (isDialing)
-            {
-                g.Clear(mBgColor);
-                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+            g.Clear(mBgColor);
+            //Draw border
+            const float xradius = 10;
+            const float yradius = 10;
 
-                for (int i = 0; i < mListNumberBox.Count; i++)
-                {
-                    mListNumberBox[i].Draw(g);
-                }
+            // Top rectangle.
+            
+            RectangleF rect = new RectangleF(
+                2, 2,
+                836,
+                300);
+
+            g.InterpolationMode = InterpolationMode.HighQualityBilinear;
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            using (Pen pen = new Pen(Color.Yellow, 3))
+            {
+                GraphicsPath path = ExtendGraphics.MakeRoundedRect(
+                    rect, xradius, yradius, true, true, true, true);
+                g.FillPath(Brushes.SlateBlue, path);
+                g.DrawPath(pen, path);
+            }
+
+            RectangleF rect1 = new RectangleF(
+                15, 15,
+                810,
+                274);
+            using (Pen pen = new Pen(Color.DarkSlateBlue, 0))
+            {
+                GraphicsPath path = ExtendGraphics.MakeRoundedRect(
+                    rect1, xradius, yradius, true, true, true, true);
+                g.FillPath(Brushes.DarkSlateBlue, path);
+                g.DrawPath(pen, path);
+            }
+
+
+            //return;
+
+
+            //draw number
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+            for (int i = 0; i < mListNumberBox.Count; i++)
+            {
+                mListNumberBox[i].Draw(g);
             }
         }
 

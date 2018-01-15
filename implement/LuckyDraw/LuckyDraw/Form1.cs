@@ -21,6 +21,7 @@ namespace LuckyDraw
 
             timer1.Interval = 30;            
             serialNumber = new SerialNumber(4);
+            //this.TransparencyKey = Color.LimeGreen;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -35,7 +36,7 @@ namespace LuckyDraw
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            serialNumber.update(e.Graphics);
+            serialNumber.Draw(e.Graphics);
         }
 
 

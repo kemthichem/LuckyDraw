@@ -11,10 +11,12 @@ namespace LuckyDraw
 {
     class NumberBox
     {
+        //
+        private PointF mMargin;
+
         //attributes
         private int mDirection; // 1: up->down, -1: down-up
         private float mVeloc;
-        private float mAccel;
         private Size mBoxSize;
         private SizeF mFontSize;
         private Point mDrawPos;
@@ -34,9 +36,10 @@ namespace LuckyDraw
         private const string SEGOE_UI_SEMIBOLD_FONT = "Segoe UI Semibold";
         
         //method
-        public NumberBox(Point pos)
+        public NumberBox(Point pos, PointF margin)
         {
             mDrawPos = pos;
+            mMargin = margin;
             mYPosText = pos.Y;
 
             mValue = genRandomeNumber(0, 9);
@@ -74,10 +77,12 @@ namespace LuckyDraw
         {
             //draw image            
             // Draw using this
+            PointF drawP = convertToGlobal(mDrawPos.X , mDrawPos.Y);
+
             if (isBlur)
-                g.DrawImage(mBackgroundBlurBm, mDrawPos.X, mDrawPos.Y);
+                g.DrawImage(mBackgroundBlurBm, drawP.X, drawP.Y);
             else
-                g.DrawImage(mBackgroundBm, mDrawPos.X, mDrawPos.Y);
+                g.DrawImage(mBackgroundBm, drawP.X, drawP.Y);
         }
 
         private void drawNumber(Graphics g)
@@ -165,12 +170,19 @@ namespace LuckyDraw
             string drawString = mValue.ToString();
 
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
-            g.DrawString(drawString, drawFont, drawBrush, mDrawPos.X + (mBoxSize.Width - mFontSize.Width)/2, mYPosText, drawFormat);
+            PointF drawP = convertToGlobal(mDrawPos.X + (mBoxSize.Width - mFontSize.Width)/2, mYPosText);
+            g.DrawString(drawString, drawFont, drawBrush, drawP.X, drawP.Y, drawFormat);
 
             Pen pen = new Pen(drawBrush);
            // g.DrawRectangle(pen, mDrawPos.X + (mBoxSize.Width - mFontSize.Width) / 2, mYPosText, mFontSize.Width, mFontSize.Height);
 
             mFontSize = g.MeasureString("1", drawFont);
+        }
+
+        private PointF convertToGlobal(float X, float Y)
+        {
+            //return new PointF(X , Y );
+            return new PointF(X + mMargin.X, Y + mMargin.Y);
         }
 
         public bool mIsStopping { get; set; }
