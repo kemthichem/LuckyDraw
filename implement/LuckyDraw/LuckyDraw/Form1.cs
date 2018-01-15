@@ -47,6 +47,7 @@ namespace LuckyDraw
         private void button1_Click(object sender, EventArgs e)
         {
             serialNumber.Stop(1059);
+            //timer1.Stop();
         }
 
     }

@@ -54,11 +54,23 @@ namespace LuckyDraw
         public void Start()
         {
             isDialing = true;
+            for (int i = 0; i < mListNumberBox.Count; i++)
+            {
+                mListNumberBox[i].Start();
+            }
         }
 
         public void Stop(int value)
         {
-            isDialing = false;
+            List<int> temp = new List<int>(4);
+            temp.Add(1);temp.Add(9);temp.Add(2);temp.Add(5);
+
+            for (int i = 0; i < temp.Count; i++)
+			{
+                mListNumberBox[i].Stop(temp[i]);
+            }
+
+            //isDialing = false;
         }
 
     }

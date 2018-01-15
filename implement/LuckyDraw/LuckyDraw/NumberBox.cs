@@ -5,28 +5,31 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LuckyDraw
 {
     class NumberBox
     {
-        //atributes
-        private bool mDirection; // true: up->down, false: down-up
+        //attributes
+        private int mDirection; // 1: up->down, -1: down-up
         private float mVeloc;
         private float mAccel;
         private Size mBoxSize;
-        private Size mFontSize;
+        private SizeF mFontSize;
         private Point mDrawPos;
         private float mYPosText;
         private int mValue;
 
-        private int mTimeToEnd;
+        private long mTimeToEnd;
 
+        private long mStopTime;
 
         //graphics
         System.Drawing.Font drawFont;
         System.Drawing.SolidBrush drawBrush;
         Bitmap mBackgroundBm;
+        Bitmap mBackgroundBlurBm;
 
         private const string SEGOE_UI_SEMIBOLD_FONT = "Segoe UI Semibold";
         
@@ -41,10 +44,14 @@ namespace LuckyDraw
 
             drawFont = new System.Drawing.Font("Segoe UI Semibold", 120, FontStyle.Bold);
             drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Gray);
-            mBackgroundBm = Properties.Resources.imageBlur;
-            
-            mDirection = true;
-            mTimeToEnd = 4000;
+            mBackgroundBm = Properties.Resources.imageBox;
+            mBackgroundBlurBm = Properties.Resources.imageBlur;
+
+            mDirection = 1;
+            mTimeToEnd = 1500;
+
+            mBoxSize = new Size(180, 248);
+            mFontSize = mBoxSize;
         }
 
         static bool genRandomDirect()
@@ -57,10 +64,20 @@ namespace LuckyDraw
             int rInt = r.Next(min, max); //for ints
             return rInt;
         }
-
-        private void drawBGImage(bool isBlur)
+        static long getNowTimeAtMilisecond()
         {
+            long time = (long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds;
+            return time;
+        }
 
+        private void drawBGImage(Graphics g, bool isBlur)
+        {
+            //draw image            
+            // Draw using this
+            if (isBlur)
+                g.DrawImage(mBackgroundBlurBm, mDrawPos.X, mDrawPos.Y);
+            else
+                g.DrawImage(mBackgroundBm, mDrawPos.X, mDrawPos.Y);
         }
 
         private void drawNumber(Graphics g)
@@ -70,31 +87,94 @@ namespace LuckyDraw
 
         public void Start()
         {
+            drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Gray);
 
+            mIsDialing = true;
+            mIsStopping = false;
+            mDirection = 1;
         }
 
         public void Stop(int value)
         {
+            //change font
+            drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
 
+            float standardY = (mBoxSize.Height - mFontSize.Height)/2;
+            value = value % 10;
+
+            //calculate distance
+            //calculate near 
+            mDirection = (mYPosText > standardY) ? -1 : 1;
+            float distance = Math.Abs(mYPosText - standardY);
+            mStopTime = getNowTimeAtMilisecond();
+            mVeloc = (distance / mTimeToEnd) * 30;
+            mValue = value;
+
+            mIsDialing = false;
+            mIsStopping = true;
         }
         
         public void Draw(Graphics g)
-        {        
-            //draw image            
-            // Draw using this   
-            g.DrawImage(mBackgroundBm, mDrawPos.X, mDrawPos.Y);
+        {
 
-            mValue = ++mValue % 10;
+            float max = mBoxSize.Height - (mFontSize.Height - 114)/2;
+            float min = - (114 + (mFontSize.Height - 114)/2);
+
+           //Debug.WriteLine("Send to debug output.");
+
+            if (mIsDialing)
+            {
+                drawBGImage(g, true);
+
+                mValue = ++mValue % 10;
+
+
+                mVeloc = genRandomeNumber(50, 120);
+                mYPosText += mVeloc;
+                if (mYPosText > max)
+                {
+                    mYPosText = min;
+                }
+            }
+            else
+                if (mIsStopping)
+                {
+                   
+                    drawBGImage(g, false);
+
+                    Debug.WriteLine("Milisecond: " +  getNowTimeAtMilisecond().ToString());
+
+                    if ((getNowTimeAtMilisecond() - mStopTime) >= mTimeToEnd)
+                    {
+                        //mIsStopping = false;
+                        mVeloc = 0;
+                        mYPosText = (mBoxSize.Height - mFontSize.Height) / 2;
+                    }
+                    mYPosText += mVeloc * mDirection;
+                    if (mYPosText > max)
+                    {
+                        mYPosText = min;
+                    }
+                    if (mYPosText < min)
+                    {
+                        mYPosText = max;
+                    }
+
+                }
+
             string drawString = mValue.ToString();
 
-            mYPosText += 80;
-            if (mYPosText > 240)
-            {
-                mYPosText = -160;
-            }            
-
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
-            g.DrawString(drawString, drawFont, drawBrush, mDrawPos.X + 10, mYPosText, drawFormat);
+            g.DrawString(drawString, drawFont, drawBrush, mDrawPos.X + (mBoxSize.Width - mFontSize.Width)/2, mYPosText, drawFormat);
+
+            Pen pen = new Pen(drawBrush);
+           // g.DrawRectangle(pen, mDrawPos.X + (mBoxSize.Width - mFontSize.Width) / 2, mYPosText, mFontSize.Width, mFontSize.Height);
+
+            mFontSize = g.MeasureString("1", drawFont);
         }
+
+        public bool mIsStopping { get; set; }
+
+        public bool mIsDialing { get; set; }
     }
 }
