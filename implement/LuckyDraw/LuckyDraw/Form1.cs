@@ -51,5 +51,31 @@ namespace LuckyDraw
             //timer1.Stop();
         }
 
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void btOpenDatabase_Click(object sender, EventArgs e)
+        {
+            // Create an instance of the open file dialog box.
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Set filter options and filter index.
+            openFileDialog1.Filter = "Excel Files (.xls)|*.xls";
+            openFileDialog1.FilterIndex = 1;
+
+            openFileDialog1.Multiselect = true;
+
+            // Call the ShowDialog method to show the dialog box.
+            var userClickedOK = openFileDialog1.ShowDialog();
+
+            // Process input if the user clicked OK.
+            if (userClickedOK == DialogResult.OK)
+            {
+                this.tbDatabase.Text = openFileDialog1.FileName;
+            }
+        }
+
     }
 }
