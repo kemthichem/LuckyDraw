@@ -84,6 +84,7 @@ namespace LuckyDraw
             //draw number
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
+            g.SetClip(new Rectangle(30, 28, 780, 248));
             for (int i = 0; i < mListNumberBox.Count; i++)
             {
                 mListNumberBox[i].Draw(g);

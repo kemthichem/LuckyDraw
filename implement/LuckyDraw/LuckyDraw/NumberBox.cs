@@ -125,8 +125,7 @@ namespace LuckyDraw
             float max = mBoxSize.Height - (mFontSize.Height - 114)/2;
             float min = - (114 + (mFontSize.Height - 114)/2);
 
-           //Debug.WriteLine("Send to debug output.");
-
+            drawBGImage(g, false);
             if (mIsDialing)
             {
                 drawBGImage(g, true);
@@ -141,37 +140,34 @@ namespace LuckyDraw
                     mYPosText = min;
                 }
             }
-            else
-                if (mIsStopping)
+            else if (mIsStopping)
+            {
+                Debug.WriteLine("Milisecond: " + getNowTimeAtMilisecond().ToString());
+
+                if ((getNowTimeAtMilisecond() - mStopTime) >= mTimeToEnd)
                 {
-                   
-                    drawBGImage(g, false);
-
-                    Debug.WriteLine("Milisecond: " +  getNowTimeAtMilisecond().ToString());
-
-                    if ((getNowTimeAtMilisecond() - mStopTime) >= mTimeToEnd)
-                    {
-                        //mIsStopping = false;
-                        mVeloc = 0;
-                        mYPosText = (mBoxSize.Height - mFontSize.Height) / 2;
-                    }
-                    mYPosText += mVeloc * mDirection;
-                    if (mYPosText > max)
-                    {
-                        mYPosText = min;
-                    }
-                    if (mYPosText < min)
-                    {
-                        mYPosText = max;
-                    }
-
+                    //mIsStopping = false;
+                    mVeloc = 0;
+                    mYPosText = (mBoxSize.Height - mFontSize.Height) / 2;
                 }
+                mYPosText += mVeloc * mDirection;
+                if (mYPosText > max)
+                {
+                    mYPosText = min;
+                }
+                if (mYPosText < min)
+                {
+                    mYPosText = max;
+                }
+            }
 
-            string drawString = mValue.ToString();
-
-            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
-            PointF drawP = convertToGlobal(mDrawPos.X + (mBoxSize.Width - mFontSize.Width)/2, mYPosText);
-            g.DrawString(drawString, drawFont, drawBrush, drawP.X, drawP.Y, drawFormat);
+            if (mIsDialing || mIsStopping)
+            {
+                string drawString = mValue.ToString();
+                System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
+                PointF drawP = convertToGlobal(mDrawPos.X + (mBoxSize.Width - mFontSize.Width) / 2, mYPosText);
+                g.DrawString(drawString, drawFont, drawBrush, drawP.X, drawP.Y, drawFormat);
+            }
 
             Pen pen = new Pen(drawBrush);
            // g.DrawRectangle(pen, mDrawPos.X + (mBoxSize.Width - mFontSize.Width) / 2, mYPosText, mFontSize.Width, mFontSize.Height);
