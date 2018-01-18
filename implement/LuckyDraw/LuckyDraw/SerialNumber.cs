@@ -107,7 +107,10 @@ namespace LuckyDraw
 
             for (int i = 0; i < temp.Count; i++)
 			{
-                mListNumberBox[i].Stop(temp[i]);
+                if (i < mListNumberBox.Count)
+                {
+                    mListNumberBox[i].Stop(temp[i]);
+                }                
             }
 
             //isDialing = false;

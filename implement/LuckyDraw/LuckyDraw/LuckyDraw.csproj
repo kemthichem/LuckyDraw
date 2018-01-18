@@ -45,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtendGraphics.cs" />
+    <Compile Include="ListAwardsFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListAwardsFrm.Designer.cs">
+      <DependentUpon>ListAwardsFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LuckyDrawController.cs" />
     <Compile Include="NumberBox.cs" />
     <Compile Include="Form1.cs">
@@ -59,6 +65,9 @@
     <Compile Include="SerialNumber.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListAwardsFrm.resx">
+      <DependentUpon>ListAwardsFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

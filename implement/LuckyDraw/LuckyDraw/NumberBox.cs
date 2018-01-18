@@ -51,7 +51,7 @@ namespace LuckyDraw
             mBackgroundBlurBm = Properties.Resources.imageBlur;
 
             mDirection = 1;
-            mTimeToEnd = 1500;
+            mTimeToEnd = 800;
 
             mBoxSize = new Size(180, 248);
             mFontSize = mBoxSize;
@@ -98,7 +98,7 @@ namespace LuckyDraw
             mIsStopping = false;
             mDirection = 1;
         }
-
+        int temp = 0;
         public void Stop(int value)
         {
             //change font
@@ -112,12 +112,14 @@ namespace LuckyDraw
             mDirection = (mYPosText > standardY) ? -1 : 1;
             float distance = Math.Abs(mYPosText - standardY);
             mStopTime = getNowTimeAtMilisecond();
-            mVeloc = (distance / mTimeToEnd) * 30;
+            mVeloc = (distance / mTimeToEnd) * 30 * 2.0F;
             mValue = value;
 
             mIsDialing = false;
             mIsStopping = true;
-        }
+            Debug.WriteLine("distance: " + distance.ToString());
+            Debug.WriteLine("mVeloc: " + mVeloc.ToString());
+}
         
         public void Draw(Graphics g)
         {
@@ -144,13 +146,21 @@ namespace LuckyDraw
             {
                 Debug.WriteLine("Milisecond: " + getNowTimeAtMilisecond().ToString());
 
-                if ((getNowTimeAtMilisecond() - mStopTime) >= mTimeToEnd)
-                {
-                    //mIsStopping = false;
-                    mVeloc = 0;
-                    mYPosText = (mBoxSize.Height - mFontSize.Height) / 2;
-                }
                 mYPosText += mVeloc * mDirection;
+                temp++;
+                Debug.WriteLine("mYPosText: " + mYPosText.ToString());
+                float standardY = (mBoxSize.Height - mFontSize.Height) / 2;
+                if ((1 == mDirection && mYPosText > standardY)||
+                    (-1 == mDirection && mYPosText < standardY))
+                {
+
+                    mYPosText = standardY;
+                    mVeloc = 0;
+                   // mYPosText = (mBoxSize.Height - mFontSize.Height) / 2;
+
+                    
+                }
+                
                 if (mYPosText > max)
                 {
                     mYPosText = min;
@@ -169,8 +179,9 @@ namespace LuckyDraw
                 g.DrawString(drawString, drawFont, drawBrush, drawP.X, drawP.Y, drawFormat);
             }
 
-            Pen pen = new Pen(drawBrush);
-           // g.DrawRectangle(pen, mDrawPos.X + (mBoxSize.Width - mFontSize.Width) / 2, mYPosText, mFontSize.Width, mFontSize.Height);
+            //Pen pen = new Pen(drawBrush);
+           // PointF drawR = convertToGlobal(mDrawPos.X + (mBoxSize.Width - mFontSize.Width) / 2, mYPosText);
+           // g.DrawRectangle(pen, drawR.X, drawR.Y, mFontSize.Width, mFontSize.Height);
 
             mFontSize = g.MeasureString("1", drawFont);
         }

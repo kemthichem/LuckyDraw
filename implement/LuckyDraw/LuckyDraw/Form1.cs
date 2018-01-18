@@ -77,5 +77,19 @@ namespace LuckyDraw
             }
         }
 
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                int k = 0;
+            }
+        }
+
+        private void ctIExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }
