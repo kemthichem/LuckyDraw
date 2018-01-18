@@ -14,24 +14,17 @@ namespace LuckyDraw
     public partial class Form1 : Form
     {
         SerialNumber serialNumber;
+        LuckyDrawController luckyDrawController;
 
         public Form1()
         {
             InitializeComponent();
 
-            timer1.Interval = 30;            
+            tmDeltaTime.Interval = 30;
             serialNumber = new SerialNumber(4);
-            //this.TransparencyKey = Color.LimeGreen;
-        }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-        }
+            luckyDrawController = new LuckyDrawController();
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            serialNumber.Start();
-            timer1.Start();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -43,17 +36,6 @@ namespace LuckyDraw
         private void timer1_Tick(object sender, EventArgs e)
         {
             pictureBox1.Invalidate();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            serialNumber.Stop(1059);
-            //timer1.Stop();
-        }
-
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
         }
 
         private void btOpenDatabase_Click(object sender, EventArgs e)
@@ -75,6 +57,65 @@ namespace LuckyDraw
             {
                 this.tbDatabase.Text = openFileDialog1.FileName;
             }
+        }
+
+        private void ctIExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btStart_Click(object sender, EventArgs e)
+        {
+            //luckyDrawController.StartLucky();
+            pnControl.Visible = false;
+            ctIBack.Enabled = true;
+            btDial.Enabled = true;
+
+        }
+
+        private void ctIList_Click(object sender, EventArgs e)
+        {
+            ListAwardsFrm frm2 = new ListAwardsFrm();
+            frm2.ShowDialog();
+        }
+
+        private void btDial_Click(object sender, EventArgs e)
+        {
+            if (luckyDrawController.IsDialing)
+            {
+                int dialNumber = luckyDrawController.Dial();
+                serialNumber.Stop(dialNumber);
+                //tmDeltaTime.Stop();
+
+                //
+                btDial.Text = "Quay";
+            }
+            else
+            {
+                serialNumber.Start();
+                tmDeltaTime.Start();
+
+                luckyDrawController.StartLucky();
+                //
+                btDial.Text = "Chốt";
+            }
+        }
+
+        private void ctIBack_Click(object sender, EventArgs e)
+        {
+            pnControl.Visible = true;
+            ctIBack.Enabled = false;
+            btDial.Enabled = false;
+        }
+
+        private void btNextAward_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btPreAward_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

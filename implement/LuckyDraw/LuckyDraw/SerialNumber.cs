@@ -14,6 +14,7 @@ namespace LuckyDraw
     {
         //Attributes
         private bool isDialing;
+        private int NumberOfBox;
 
         //graphic
         private Color mBgColor;
@@ -22,6 +23,7 @@ namespace LuckyDraw
 
         public SerialNumber(int numberOfBox)
         {
+            NumberOfBox = numberOfBox;
             isDialing = false;
 
             mListNumberBox = new List<NumberBox>();
@@ -38,16 +40,13 @@ namespace LuckyDraw
                 mListNumberBox.Add(nb);
             }
         }
-
-        public void Draw(Graphics g)
+        private void DrawBorder(Graphics g)
         {
-            g.Clear(mBgColor);
-            //Draw border
             const float xradius = 10;
             const float yradius = 10;
 
             // Top rectangle.
-            
+
             RectangleF rect = new RectangleF(
                 2, 2,
                 836,
@@ -77,9 +76,13 @@ namespace LuckyDraw
                 g.DrawPath(pen, path);
             }
 
+        }
 
-            //return;
-
+        public void Draw(Graphics g)
+        {
+            g.Clear(mBgColor);
+            //Draw border
+            DrawBorder(g);
 
             //draw number
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
@@ -102,15 +105,25 @@ namespace LuckyDraw
 
         public void Stop(int value)
         {
-            List<int> temp = new List<int>(4);
-            temp.Add(1);temp.Add(9);temp.Add(2);temp.Add(5);
+            List<int> temp = new List<int>(this.NumberOfBox);
+
+            for (int i = this.NumberOfBox; i > 0; i--)
+            {
+                int deci = (int)Math.Pow(10, i - 1);
+                int val = value / deci;
+                value -= (val * deci);
+
+                temp.Add(val);
+            }
+
 
             for (int i = 0; i < temp.Count; i++)
 			{
-                mListNumberBox[i].Stop(temp[i]);
+                if (i < mListNumberBox.Count)
+                {
+                    mListNumberBox[i].Stop(temp[i]);
+                }                
             }
-
-            //isDialing = false;
         }
 
     }
