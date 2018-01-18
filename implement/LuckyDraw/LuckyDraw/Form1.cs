@@ -74,6 +74,10 @@ namespace LuckyDraw
             if (userClickedOK == DialogResult.OK)
             {
                 this.tbDatabase.Text = openFileDialog1.FileName;
+
+                var importExcelFile = new ImportExcelFile(openFileDialog1.FileName);
+                var people = importExcelFile.GetPeople();
+                MessageBox.Show(people.Count.ToString());
             }
         }
 
