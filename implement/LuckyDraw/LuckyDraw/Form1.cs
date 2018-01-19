@@ -44,7 +44,7 @@ namespace LuckyDraw
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             // Set filter options and filter index.
-            openFileDialog1.Filter = "Excel Files (.xls)|*.xls";
+            openFileDialog1.Filter = "Excel Files|*.xls;*.xlsx";
             openFileDialog1.FilterIndex = 1;
 
             openFileDialog1.Multiselect = true;
@@ -71,6 +71,7 @@ namespace LuckyDraw
             ctIBack.Enabled = true;
             btDial.Enabled = true;
 
+            lbCurAward.Text = luckyDrawController.GetCurAwardName();
         }
 
         private void ctIList_Click(object sender, EventArgs e)
@@ -88,7 +89,7 @@ namespace LuckyDraw
                 //tmDeltaTime.Stop();
 
                 //
-                btDial.Text = "Quay";
+                btDial.Text = "QUAY SỐ";
             }
             else
             {
@@ -97,7 +98,7 @@ namespace LuckyDraw
 
                 luckyDrawController.StartLucky();
                 //
-                btDial.Text = "Chốt";
+                btDial.Text = "CHỐT";
             }
         }
 
@@ -110,13 +111,84 @@ namespace LuckyDraw
 
         private void btNextAward_Click(object sender, EventArgs e)
         {
-
+            luckyDrawController.NextAward();
+            lbCurAward.Text = luckyDrawController.GetCurAwardName();
         }
 
         private void btPreAward_Click(object sender, EventArgs e)
         {
+            luckyDrawController.PreAward();
+            lbCurAward.Text = luckyDrawController.GetCurAwardName();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //combobox
+            BindingCbAward();
+            tbAwardName.Text = luckyDrawController.GetCurAwardName();
+        }
+
+#region Award: Add, Edit, Remove
+
+
+        private void cbAward_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            luckyDrawController.CurrentAwardID = ((Award)cbAward.SelectedItem).ID;
+            tbAwardName.Text = luckyDrawController.GetCurAwardName();
+        }
+
+        private void BindingCbAward()
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = luckyDrawController.AwardList;
+            cbAward.DataSource = bs;
+
+            cbAward.DisplayMember = "Name";
+            cbAward.ValueMember = "ID";
+        }
+
+        private void btAdd_Click(object sender, EventArgs e)
+        {
+            int newID = luckyDrawController.AddAward(tbAwardName.Text);
+            if (newID != -1)
+            {
+                BindingCbAward();
+                cbAward.SelectedValue = newID;
+            }
+            else
+            {
+                MessageBox.Show("Giải thưởng đã tồn tại", "Thêm giải thưởng", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
+
+        private void btEdit_Click(object sender, EventArgs e)
+        {
+            if (luckyDrawController.EditAward(luckyDrawController.CurrentAwardID, tbAwardName.Text))
+            {
+                int currentIndex = cbAward.SelectedIndex;
+                BindingCbAward();
+                cbAward.SelectedIndex = currentIndex;
+            }
+            else
+            {
+                MessageBox.Show("Giải thưởng đã tồn tại", "Sửa giải thưởng", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+
+        private void btRemove_Click(object sender, EventArgs e)
+        {
+            if (luckyDrawController.RemoveAward(luckyDrawController.CurrentAwardID))
+            {
+                BindingCbAward();
+            }
+            else
+            {
+                MessageBox.Show("Không còn giải thưởng để xóa", "Xóa giải thưởng", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+#endregion
 
     }
 }

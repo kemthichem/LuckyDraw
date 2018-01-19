@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Award.cs" />
+    <Compile Include="LuckyDrawData.cs" />
     <Compile Include="ExtendGraphics.cs" />
     <Compile Include="ListAwardsFrm.cs">
       <SubType>Form</SubType>
@@ -99,6 +101,7 @@
   <ItemGroup>
     <None Include="Resources\Picture1.jpg" />
     <None Include="Resources\border.png" />
+    <None Include="Resources\button.png" />
     <Content Include="Resources\imageBox.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

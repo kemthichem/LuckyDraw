@@ -99,8 +99,6 @@ namespace LuckyDraw
 
             mIsDialing = false;
             mIsStopping = true;
-            Debug.WriteLine("distance: " + distance.ToString());
-            Debug.WriteLine("mVeloc: " + mVeloc.ToString());
 }
         
         public void Draw(Graphics g)
@@ -135,9 +133,7 @@ namespace LuckyDraw
 
                     mYPosText = standardY;
                     mVeloc = 0;
-                   // mYPosText = (mBoxSize.Height - mFontSize.Height) / 2;
-
-                    
+                   // mYPosText = (mBoxSize.Height - mFontSize.Height) / 2;                    
                 }
                 
                 if (mYPosText > max)

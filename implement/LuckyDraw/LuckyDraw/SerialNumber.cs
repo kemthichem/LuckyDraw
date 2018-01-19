@@ -62,6 +62,7 @@ namespace LuckyDraw
                     rect, xradius, yradius, true, true, true, true);
                 g.FillPath(Brushes.SlateBlue, path);
                 g.DrawPath(pen, path);
+                path.Dispose();
             }
 
             RectangleF rect1 = new RectangleF(
@@ -74,6 +75,7 @@ namespace LuckyDraw
                     rect1, xradius, yradius, true, true, true, true);
                 g.FillPath(Brushes.DarkSlateBlue, path);
                 g.DrawPath(pen, path);
+                path.Dispose();
             }
 
         }

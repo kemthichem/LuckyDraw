@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tmDeltaTime = new System.Windows.Forms.Timer(this.components);
-            this.lbAward = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.lbCurAward = new System.Windows.Forms.Label();
+            this.ofdDatabase = new System.Windows.Forms.OpenFileDialog();
             this.ctMainForm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctIList = new System.Windows.Forms.ToolStripMenuItem();
             this.ctISave = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,23 +76,23 @@
             // 
             this.tmDeltaTime.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lbAward
+            // lbCurAward
             // 
-            this.lbAward.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbAward.BackColor = System.Drawing.Color.SlateBlue;
-            this.lbAward.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbAward.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAward.ForeColor = System.Drawing.Color.Yellow;
-            this.lbAward.Location = new System.Drawing.Point(532, 93);
-            this.lbAward.Name = "lbAward";
-            this.lbAward.Size = new System.Drawing.Size(123, 31);
-            this.lbAward.TabIndex = 15;
-            this.lbAward.Text = "Giải thưởng";
-            this.lbAward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbCurAward.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbCurAward.BackColor = System.Drawing.Color.SlateBlue;
+            this.lbCurAward.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbCurAward.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCurAward.ForeColor = System.Drawing.Color.Yellow;
+            this.lbCurAward.Location = new System.Drawing.Point(532, 93);
+            this.lbCurAward.Name = "lbCurAward";
+            this.lbCurAward.Size = new System.Drawing.Size(123, 31);
+            this.lbCurAward.TabIndex = 15;
+            this.lbCurAward.Text = "Giải thưởng";
+            this.lbCurAward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // openFileDialog1
+            // ofdDatabase
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.ofdDatabase.FileName = "Mở cơ sở dữ liệu";
             // 
             // ctMainForm
             // 
@@ -178,6 +178,7 @@
             this.pnControl.Controls.Add(this.tbDatabase);
             this.pnControl.Controls.Add(this.cbAward);
             this.pnControl.Controls.Add(this.tbBgImage);
+            this.pnControl.ForeColor = System.Drawing.Color.Black;
             this.pnControl.Location = new System.Drawing.Point(184, 578);
             this.pnControl.Name = "pnControl";
             this.pnControl.Size = new System.Drawing.Size(833, 188);
@@ -211,6 +212,7 @@
             this.btEdit.TabIndex = 4;
             this.btEdit.Text = ">";
             this.btEdit.UseVisualStyleBackColor = true;
+            this.btEdit.Click += new System.EventHandler(this.btEdit_Click);
             // 
             // label1
             // 
@@ -242,6 +244,7 @@
             this.btRemove.TabIndex = 5;
             this.btRemove.Text = "x";
             this.btRemove.UseVisualStyleBackColor = true;
+            this.btRemove.Click += new System.EventHandler(this.btRemove_Click);
             // 
             // btOpenDatabase
             // 
@@ -285,6 +288,7 @@
             this.btAdd.TabIndex = 3;
             this.btAdd.Text = "+";
             this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
             // 
             // tbDatabase
             // 
@@ -303,6 +307,7 @@
             this.cbAward.Name = "cbAward";
             this.cbAward.Size = new System.Drawing.Size(341, 21);
             this.cbAward.TabIndex = 2;
+            this.cbAward.SelectedIndexChanged += new System.EventHandler(this.cbAward_SelectedIndexChanged);
             // 
             // tbBgImage
             // 
@@ -315,12 +320,18 @@
             // btDial
             // 
             this.btDial.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btDial.BackColor = System.Drawing.Color.Transparent;
+            this.btDial.BackgroundImage = global::LuckyDraw.Properties.Resources.button;
             this.btDial.Enabled = false;
-            this.btDial.Location = new System.Drawing.Point(557, 447);
+            this.btDial.FlatAppearance.BorderSize = 0;
+            this.btDial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btDial.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDial.ForeColor = System.Drawing.Color.Yellow;
+            this.btDial.Location = new System.Drawing.Point(428, 433);
             this.btDial.Name = "btDial";
-            this.btDial.Size = new System.Drawing.Size(79, 24);
+            this.btDial.Size = new System.Drawing.Size(288, 62);
             this.btDial.TabIndex = 10;
-            this.btDial.Text = "Quay";
+            this.btDial.Text = "QUAY SỐ";
             this.btDial.UseVisualStyleBackColor = true;
             this.btDial.Click += new System.EventHandler(this.btDial_Click);
             // 
@@ -335,13 +346,15 @@
             this.Controls.Add(this.pnControl);
             this.Controls.Add(this.btPreAward);
             this.Controls.Add(this.btNextAward);
-            this.Controls.Add(this.lbAward);
+            this.Controls.Add(this.lbCurAward);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btDial);
+            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "LuckyDraw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ctMainForm.ResumeLayout(false);
             this.pnControl.ResumeLayout(false);
@@ -354,8 +367,8 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer tmDeltaTime;
-        private System.Windows.Forms.Label lbAward;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label lbCurAward;
+        private System.Windows.Forms.OpenFileDialog ofdDatabase;
         private System.Windows.Forms.ContextMenuStrip ctMainForm;
         private System.Windows.Forms.ToolStripMenuItem ctISave;
         private System.Windows.Forms.ToolStripMenuItem ctIBack;
