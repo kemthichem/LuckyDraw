@@ -46,8 +46,7 @@ namespace LuckyDraw
             // Set filter options and filter index.
             openFileDialog1.Filter = "Excel Files|*.xls;*.xlsx";
             openFileDialog1.FilterIndex = 1;
-
-            openFileDialog1.Multiselect = true;
+            openFileDialog1.Multiselect = false;
 
             // Call the ShowDialog method to show the dialog box.
             var userClickedOK = openFileDialog1.ShowDialog();
@@ -56,6 +55,8 @@ namespace LuckyDraw
             if (userClickedOK == DialogResult.OK)
             {
                 this.tbDatabase.Text = openFileDialog1.FileName;
+
+                luckyDrawController.LoadDataBase(this.tbAwardName.Text);
             }
         }
 
@@ -85,28 +86,61 @@ namespace LuckyDraw
             if (luckyDrawController.IsDialing)
             {
                 int dialNumber = luckyDrawController.Dial();
+
                 serialNumber.Stop(dialNumber);
                 //tmDeltaTime.Stop();
 
-                //
+                Person person = luckyDrawController.GetPersonArchived();
+                lbPersonName.Text = person.Name;
+                lbPersonInfo.Text = person.Info;
+                lbPersonInfo.Visible = true;
+                lbPersonName.Visible = true;
+                lbCurAward.Text = luckyDrawController.GetCurAwardName();
+
                 btDial.Text = "QUAY SỐ";
+                ctIBack.Enabled = true;
+
+                if (luckyDrawController.PersonList.Count == 0)
+                    btDial.Enabled = false;
             }
             else
             {
-                serialNumber.Start();
-                tmDeltaTime.Start();
+                if (luckyDrawController.StartLucky())
+                {
+                    serialNumber.Start();
+                    tmDeltaTime.Start();                    
+                    //
+                    btDial.Text = "CHỐT";
+                    ctIBack.Enabled = false;
 
-                luckyDrawController.StartLucky();
-                //
-                btDial.Text = "CHỐT";
+                    lbPersonInfo.Visible = false;
+                    lbPersonName.Visible = false;
+                }
+                //else
+                //{
+                //    serialNumber.Reset();
+                //    btDial.Enabled = false;
+
+                //    MessageBox.Show("Danh sách trống. Vui lòng chọn cơ sở dữ liệu.", "Quay số", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    backToControl();
+                //}               
             }
         }
 
-        private void ctIBack_Click(object sender, EventArgs e)
+        private void backToControl()
         {
             pnControl.Visible = true;
             ctIBack.Enabled = false;
             btDial.Enabled = false;
+
+            lbPersonInfo.Visible = false;
+            lbPersonName.Visible = true;
+
+            lbPersonName.Text = "Tên-Bộ Phận";
+        }
+        private void ctIBack_Click(object sender, EventArgs e)
+        {
+            backToControl();
         }
 
         private void btNextAward_Click(object sender, EventArgs e)
@@ -134,7 +168,7 @@ namespace LuckyDraw
         private void cbAward_SelectedIndexChanged(object sender, EventArgs e)
         {
             luckyDrawController.CurrentAwardID = ((Award)cbAward.SelectedItem).ID;
-            tbAwardName.Text = luckyDrawController.GetCurAwardName();
+            tbAwardName.Text = cbAward.Text;
         }
 
         private void BindingCbAward()
@@ -189,6 +223,76 @@ namespace LuckyDraw
             }
         }
 #endregion
+
+        private void btBgImage_Click(object sender, EventArgs e)
+        {
+            // Create an instance of the open file dialog box.
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Set filter options and filter index.
+            openFileDialog1.Filter = "Image Files|*.jpg;*.png";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Multiselect = false;
+
+            // Call the ShowDialog method to show the dialog box.
+            var userClickedOK = openFileDialog1.ShowDialog();
+
+            // Process input if the user clicked OK.
+            if (userClickedOK == DialogResult.OK)
+            {
+                this.tbBgImage.Text = openFileDialog1.FileName;
+                Image bgImage = new Bitmap(openFileDialog1.FileName);
+                this.BackgroundImage = bgImage;
+            }
+        }
+
+        private void pbDisplayInfo_Paint(object sender, PaintEventArgs e)
+        {
+
+            e.Graphics.Clear(Color.Transparent);
+            Person person = luckyDrawController.GetPersonArchived();
+
+            StringFormat drawFormat = new System.Drawing.StringFormat();
+            Font drawFont = new Font("Segoe UI Semibold", 120, FontStyle.Bold);
+            Brush drawBrush = new SolidBrush(System.Drawing.Color.Gray);
+
+            float Y = 10;
+            float X = 0;// pbDisplayInfo.Width / 2;
+            SizeF size = e.Graphics.MeasureString(person.Name, drawFont);
+            //draw name            
+
+            X -= size.Width / 2;
+            e.Graphics.DrawString(person.Name, drawFont, drawBrush, X, Y);
+
+            //draw info
+            Y += size.Height;
+            X = 0;// pbDisplayInfo.Width / 2;
+            size = e.Graphics.MeasureString(person.Info, drawFont);
+            e.Graphics.DrawString(person.Info, drawFont, drawBrush, X, Y);
+        }
+
+        private void lbPersonName_VisibleChanged(object sender, EventArgs e)
+        {
+            
+            lbPersonName.Location = new Point ((this.Width - lbPersonName.Width)/2, 500);
+        }
+
+        private void lbPersonInfo_VisibleChanged(object sender, EventArgs e)
+        {
+            lbPersonInfo.Location = new Point((this.Width - lbPersonInfo.Width) / 2, 570);
+        }
+
+        private void lbPersonName_Click(object sender, EventArgs e)
+        {
+            if (pnControl.Visible == true)
+            {
+                if (DialogResult.OK == colorDialog1.ShowDialog())
+                {
+                    lbPersonName.ForeColor = colorDialog1.Color;
+                    lbPersonInfo.ForeColor = colorDialog1.Color;
+                }
+            }
+        }
 
     }
 }

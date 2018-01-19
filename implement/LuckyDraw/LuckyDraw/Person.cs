@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace LuckyDraw
 {
-    class Person
+    public class Person
     {
-        private int mId;
-        private string mName;
-        private string mInfo;
-        private string mAwardName;
+        public int Id;
+        public string Name;
+        public string Info;
+        public string AwardName;
 
         public Person()
         {

@@ -28,7 +28,7 @@ namespace LuckyDraw
 
             mListNumberBox = new List<NumberBox>();
 
-            mBgColor = Color.Transparent;
+            mBgColor = Color.FromArgb(0, 12, 12, 12);
 
 
             for (int i = 0; i < numberOfBox; i++)
@@ -82,8 +82,14 @@ namespace LuckyDraw
 
         public void Draw(Graphics g)
         {
-            g.Clear(mBgColor);
+            //g.Clear()
+            //g.DrawImage()
             //Draw border
+
+            Bitmap transparentBm = Properties.Resources.transparent;
+            g.DrawImage(transparentBm, g.ClipBounds);
+
+
             DrawBorder(g);
 
             //draw number
@@ -128,5 +134,13 @@ namespace LuckyDraw
             }
         }
 
+
+        internal void Reset()
+        {
+            for (int i = 0; i < mListNumberBox.Count; i++)
+            {
+                mListNumberBox[i].mIsDialing = mListNumberBox[i].mIsStopping = false;
+            }
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace LuckyDraw
 
         public void Start()
         {
-            drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Gray);
+            drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.DarkGray);
 
             mIsDialing = true;
             mIsStopping = false;
@@ -84,7 +84,7 @@ namespace LuckyDraw
         public void Stop(int value)
         {
             //change font
-            drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+            drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
 
             float standardY = (mBoxSize.Height - mFontSize.Height)/2;
             value = value % 10;

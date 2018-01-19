@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tmDeltaTime = new System.Windows.Forms.Timer(this.components);
             this.lbCurAward = new System.Windows.Forms.Label();
-            this.ofdDatabase = new System.Windows.Forms.OpenFileDialog();
             this.ctMainForm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctIList = new System.Windows.Forms.ToolStripMenuItem();
             this.ctISave = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,22 +53,15 @@
             this.tbDatabase = new System.Windows.Forms.TextBox();
             this.cbAward = new System.Windows.Forms.ComboBox();
             this.tbBgImage = new System.Windows.Forms.TextBox();
+            this.lbPersonInfo = new System.Windows.Forms.Label();
+            this.lbPersonName = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btDial = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.ctMainForm.SuspendLayout();
             this.pnControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(177, 123);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(840, 304);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // tmDeltaTime
             // 
@@ -83,16 +74,13 @@
             this.lbCurAward.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbCurAward.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCurAward.ForeColor = System.Drawing.Color.Yellow;
-            this.lbCurAward.Location = new System.Drawing.Point(532, 93);
+            this.lbCurAward.Location = new System.Drawing.Point(509, 93);
             this.lbCurAward.Name = "lbCurAward";
-            this.lbCurAward.Size = new System.Drawing.Size(123, 31);
+            this.lbCurAward.Size = new System.Drawing.Size(146, 31);
             this.lbCurAward.TabIndex = 15;
             this.lbCurAward.Text = "Giải thưởng";
             this.lbCurAward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ofdDatabase
-            // 
-            this.ofdDatabase.FileName = "Mở cơ sở dữ liệu";
+            this.lbCurAward.UseCompatibleTextRendering = true;
             // 
             // ctMainForm
             // 
@@ -154,7 +142,7 @@
             // btPreAward
             // 
             this.btPreAward.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btPreAward.Location = new System.Drawing.Point(503, 95);
+            this.btPreAward.Location = new System.Drawing.Point(477, 94);
             this.btPreAward.Name = "btPreAward";
             this.btPreAward.Size = new System.Drawing.Size(26, 23);
             this.btPreAward.TabIndex = 22;
@@ -165,6 +153,7 @@
             // pnControl
             // 
             this.pnControl.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnControl.BackColor = System.Drawing.Color.Transparent;
             this.pnControl.Controls.Add(this.tbAwardName);
             this.pnControl.Controls.Add(this.label5);
             this.pnControl.Controls.Add(this.btEdit);
@@ -179,7 +168,7 @@
             this.pnControl.Controls.Add(this.cbAward);
             this.pnControl.Controls.Add(this.tbBgImage);
             this.pnControl.ForeColor = System.Drawing.Color.Black;
-            this.pnControl.Location = new System.Drawing.Point(184, 578);
+            this.pnControl.Location = new System.Drawing.Point(184, 588);
             this.pnControl.Name = "pnControl";
             this.pnControl.Size = new System.Drawing.Size(833, 188);
             this.pnControl.TabIndex = 24;
@@ -234,6 +223,7 @@
             this.btBgImage.TabIndex = 7;
             this.btBgImage.Text = "...";
             this.btBgImage.UseVisualStyleBackColor = true;
+            this.btBgImage.Click += new System.EventHandler(this.btBgImage_Click);
             // 
             // btRemove
             // 
@@ -314,8 +304,53 @@
             this.tbBgImage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbBgImage.Location = new System.Drawing.Point(201, 113);
             this.tbBgImage.Name = "tbBgImage";
+            this.tbBgImage.ReadOnly = true;
             this.tbBgImage.Size = new System.Drawing.Size(304, 20);
             this.tbBgImage.TabIndex = 6;
+            // 
+            // lbPersonInfo
+            // 
+            this.lbPersonInfo.AutoSize = true;
+            this.lbPersonInfo.BackColor = System.Drawing.Color.Transparent;
+            this.lbPersonInfo.Font = new System.Drawing.Font("Segoe UI Semibold", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPersonInfo.ForeColor = System.Drawing.Color.Yellow;
+            this.lbPersonInfo.Location = new System.Drawing.Point(132, 504);
+            this.lbPersonInfo.Name = "lbPersonInfo";
+            this.lbPersonInfo.Size = new System.Drawing.Size(269, 72);
+            this.lbPersonInfo.TabIndex = 27;
+            this.lbPersonInfo.Text = "Thông tin";
+            this.lbPersonInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPersonInfo.Visible = false;
+            this.lbPersonInfo.VisibleChanged += new System.EventHandler(this.lbPersonInfo_VisibleChanged);
+            // 
+            // lbPersonName
+            // 
+            this.lbPersonName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbPersonName.AutoSize = true;
+            this.lbPersonName.BackColor = System.Drawing.Color.Transparent;
+            this.lbPersonName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbPersonName.Font = new System.Drawing.Font("Segoe UI Semibold", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPersonName.ForeColor = System.Drawing.Color.Yellow;
+            this.lbPersonName.Location = new System.Drawing.Point(417, 504);
+            this.lbPersonName.Name = "lbPersonName";
+            this.lbPersonName.Size = new System.Drawing.Size(350, 81);
+            this.lbPersonName.TabIndex = 26;
+            this.lbPersonName.Text = "Tên-Bộ Phận";
+            this.lbPersonName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPersonName.UseCompatibleTextRendering = true;
+            this.lbPersonName.VisibleChanged += new System.EventHandler(this.lbPersonName_VisibleChanged);
+            this.lbPersonName.Click += new System.EventHandler(this.lbPersonName_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Location = new System.Drawing.Point(177, 123);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(840, 304);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // btDial
             // 
@@ -327,7 +362,7 @@
             this.btDial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btDial.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDial.ForeColor = System.Drawing.Color.Yellow;
-            this.btDial.Location = new System.Drawing.Point(428, 433);
+            this.btDial.Location = new System.Drawing.Point(428, 440);
             this.btDial.Name = "btDial";
             this.btDial.Size = new System.Drawing.Size(288, 62);
             this.btDial.TabIndex = 10;
@@ -339,27 +374,29 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::LuckyDraw.Properties.Resources.Picture1;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(32)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1117, 788);
             this.ContextMenuStrip = this.ctMainForm;
+            this.Controls.Add(this.lbPersonInfo);
+            this.Controls.Add(this.lbPersonName);
             this.Controls.Add(this.pnControl);
             this.Controls.Add(this.btPreAward);
             this.Controls.Add(this.btNextAward);
             this.Controls.Add(this.lbCurAward);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btDial);
-            this.ForeColor = System.Drawing.Color.Black;
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "LuckyDraw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ctMainForm.ResumeLayout(false);
             this.pnControl.ResumeLayout(false);
             this.pnControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -368,7 +405,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer tmDeltaTime;
         private System.Windows.Forms.Label lbCurAward;
-        private System.Windows.Forms.OpenFileDialog ofdDatabase;
         private System.Windows.Forms.ContextMenuStrip ctMainForm;
         private System.Windows.Forms.ToolStripMenuItem ctISave;
         private System.Windows.Forms.ToolStripMenuItem ctIBack;
@@ -392,6 +428,9 @@
         private System.Windows.Forms.Button btDial;
         private System.Windows.Forms.TextBox tbBgImage;
         private System.Windows.Forms.ToolStripMenuItem ctIList;
+        private System.Windows.Forms.Label lbPersonInfo;
+        private System.Windows.Forms.Label lbPersonName;
+        private System.Windows.Forms.ColorDialog colorDialog1;
 
     }
 }

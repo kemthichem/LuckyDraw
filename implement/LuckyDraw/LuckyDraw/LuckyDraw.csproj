@@ -99,6 +99,7 @@
     <None Include="Resources\imageBlur.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\transparent.png" />
     <None Include="Resources\Picture1.jpg" />
     <None Include="Resources\border.png" />
     <None Include="Resources\button.png" />
