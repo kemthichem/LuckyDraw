@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tmDeltaTime = new System.Windows.Forms.Timer(this.components);
             this.lbCurAward = new System.Windows.Forms.Label();
             this.ctMainForm = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -58,6 +59,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btDial = new System.Windows.Forms.Button();
+            this.tmDisplayInfo = new System.Windows.Forms.Timer(this.components);
             this.ctMainForm.SuspendLayout();
             this.pnControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -386,6 +388,11 @@
             this.btDial.UseVisualStyleBackColor = true;
             this.btDial.Click += new System.EventHandler(this.btDial_Click);
             // 
+            // tmDisplayInfo
+            // 
+            this.tmDisplayInfo.Interval = 1200;
+            this.tmDisplayInfo.Tick += new System.EventHandler(this.tmDisplayInfo_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -403,6 +410,7 @@
             this.Controls.Add(this.btDial);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "LuckyDraw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -447,6 +455,7 @@
         private System.Windows.Forms.Label lbPersonInfo;
         private System.Windows.Forms.Label lbPersonName;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Timer tmDisplayInfo;
 
     }
 }

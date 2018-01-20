@@ -34,12 +34,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListAwardsFrm));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btSave = new System.Windows.Forms.Button();
             this.IdClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InfoClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AwardClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,17 +78,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(682, 319);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // btSave
-            // 
-            this.btSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btSave.Location = new System.Drawing.Point(303, 341);
-            this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(75, 23);
-            this.btSave.TabIndex = 1;
-            this.btSave.Text = "Lưu";
-            this.btSave.UseVisualStyleBackColor = true;
-            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // IdClm
             // 
@@ -130,6 +120,17 @@
             this.AwardClm.Name = "AwardClm";
             this.AwardClm.ReadOnly = true;
             // 
+            // btSave
+            // 
+            this.btSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btSave.Location = new System.Drawing.Point(303, 341);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(75, 23);
+            this.btSave.TabIndex = 1;
+            this.btSave.Text = "Lưu";
+            this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            // 
             // ListAwardsFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -137,6 +138,9 @@
             this.ClientSize = new System.Drawing.Size(682, 376);
             this.Controls.Add(this.btSave);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ListAwardsFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Danh sách trúng giải";

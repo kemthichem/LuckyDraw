@@ -31,6 +31,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\luckydraw.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -99,10 +103,13 @@
     <None Include="Resources\imageBlur.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\luckydraw.ico" />
     <None Include="Resources\transparent.png" />
     <None Include="Resources\Picture1.jpg" />
     <None Include="Resources\border.png" />
     <None Include="Resources\button.png" />
+    <Content Include="luckydraw.ico" />
+    <None Include="Resources\Image1.bmp" />
     <Content Include="Resources\imageBox.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

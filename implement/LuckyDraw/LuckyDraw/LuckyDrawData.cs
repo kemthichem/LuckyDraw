@@ -46,6 +46,7 @@ namespace LuckyDraw
             p5.Info = "TMA/EMB2";
             PersonList.Add(p5);
 
+            //PersonList.Clear();
             return PersonList;
         }
         public bool SaveListPersonToDatabase(List<Person> personList, string savePath)

@@ -87,30 +87,10 @@ namespace LuckyDraw
             if (luckyDrawController.IsDialing)
             {
                 int personID = luckyDrawController.StopDial();
-
                 serialNumber.Stop(personID);
                 //tmDeltaTime.Stop();
-
-                Person person = luckyDrawController.GetPersonArchived();
-                if (person != null)
-                {
-                    lbPersonName.Text = person.Name;
-                    lbPersonInfo.Text = person.Info;
-                }
-                lbPersonInfo.Visible = true;
-                lbPersonName.Visible = true;
-                lbCurAward.Text = luckyDrawController.GetCurAwardName();
-
-                btDial.Text = "QUAY SỐ";
-                ctIBack.Enabled = true;
-
-                if (luckyDrawController.PersonList.Count == 0)
-                    btDial.Enabled = false;
-                if (luckyDrawController.HasDataToSave)
-                {
-                    ctIList.Enabled = true;
-                    ctISave.Enabled = true;
-                }
+                btDial.Enabled = false;
+                tmDisplayInfo.Start();
 
             }
             else
@@ -332,6 +312,33 @@ namespace LuckyDraw
                     lbPersonInfo.ForeColor = colorDialog1.Color;
                 }
             }
+        }
+
+        private void tmDisplayInfo_Tick(object sender, EventArgs e)
+        {
+            Person person = luckyDrawController.GetPersonArchived();
+            if (person != null)
+            {
+                lbPersonName.Text = person.Name;
+                lbPersonInfo.Text = person.Info;
+            }
+            lbPersonInfo.Visible = true;
+            lbPersonName.Visible = true;
+            lbCurAward.Text = luckyDrawController.GetCurAwardName();
+
+            btDial.Text = "QUAY SỐ";
+            ctIBack.Enabled = true;
+            btDial.Enabled = true;
+
+            if (luckyDrawController.PersonList.Count == 0)
+                btDial.Enabled = false;
+            if (luckyDrawController.HasDataToSave)
+            {
+                ctIList.Enabled = true;
+                ctISave.Enabled = true;
+            }
+
+            tmDisplayInfo.Stop();
         }
 
 
