@@ -11,14 +11,46 @@ namespace LuckyDraw
         public Application Application;
         public Workbook Workbook;
         public Worksheet Worksheet;
+        public string Path;
 
-        public ImportExcelFile(string fileName)
+        public ImportExcelFile(string path)
         {
-            Application = new Application();
-            Workbook = Application.Workbooks.Open(fileName, 0, true, 5, "", "", true, XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
-            Worksheet = (Worksheet)Workbook.Worksheets.get_Item(1);
-            Range = Worksheet.UsedRange;
+            //Path = path;
+            Path = path;
         }
+
+        private bool InitializeReadFile()
+        {
+            try
+            {
+                Application = new Application();
+                Workbook = Application.Workbooks.Open(Path, 0, true, 5, "", "", true, XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+                Worksheet = (Worksheet)Workbook.Worksheets.get_Item(1);
+                Range = Worksheet.UsedRange;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool InitializeSaveFile()
+        {
+            try
+            {
+                object misValue = System.Reflection.Missing.Value;
+                Application = new Application();
+                Workbook = Application.Workbooks.Add(misValue);
+                Worksheet = (Worksheet)Workbook.Worksheets.get_Item(1);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
         private void Realease()
         {
@@ -33,6 +65,12 @@ namespace LuckyDraw
         public List<Person> GetPeople()
         {
             var people = new List<Person>();
+
+            if (!InitializeReadFile())
+            {
+                return people;
+            }
+
             var totalRows = Range.Rows.Count;
             for (var row = 2; row <= totalRows; row++)
             {
@@ -64,6 +102,31 @@ namespace LuckyDraw
             Realease();
 
             return people;
+        }
+
+        public bool SaveAward(List<Person> personList, string savePath)
+        {
+
+            Worksheet.Cells[1, 1] = "ID";
+            Worksheet.Cells[1, 2] = "Name";
+            Worksheet.Cells[1, 3] = "Infor";
+            Worksheet.Cells[1, 4] = "Award";
+
+            if (personList == null) return false;
+            
+
+
+
+
+
+            //xlWorkBook.SaveAs("d:\\csharp-Excel.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            //xlWorkBook.Close(true, misValue, misValue);
+            //xlApp.Quit();
+
+            //Marshal.ReleaseComObject(xlWorkSheet);
+            //Marshal.ReleaseComObject(xlWorkBook);
+            //Marshal.ReleaseComObject(xlApp);
+            return true;
         }
     }
 }
