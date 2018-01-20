@@ -25,7 +25,9 @@ namespace LuckyDraw
 
         private void ListAwardsFrm_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = this.list;
+            SortableList<Person> persons = new SortableList<Person>(this.list);
+            dataGridView1.DataSource = persons;
+
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.Cells[0].Value.ToString() == curId.ToString())
