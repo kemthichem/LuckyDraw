@@ -95,7 +95,8 @@ namespace LuckyDraw
                     }
                 }
 
-                Workbook.SaveAs(Path, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                Worksheet.Columns.AutoFit();
+                Workbook.SaveAs(Path, Path.Substring(Path.Length - 3) == "xls" ? XlFileFormat.xlWorkbookNormal : XlFileFormat.xlOpenXMLWorkbook, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
                 Workbook.Close(true, misValue, misValue);
                 Application.Quit();
 
