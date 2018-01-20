@@ -233,12 +233,15 @@ namespace LuckyDraw
             return false;
         }        
 
-        internal void SavePersonArchived(string savePath)
+        internal bool SavePersonArchived(string savePath)
         {
             if (luckyDrawData.SaveListPersonToDatabase(PersonArchivedList, savePath))
             {
                 HasDataToSave = false;
+                return true;
             }
+
+            return false;
         }
 
     }

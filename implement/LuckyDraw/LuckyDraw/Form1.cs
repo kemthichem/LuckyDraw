@@ -181,11 +181,16 @@ namespace LuckyDraw
 
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                luckyDrawController.SavePersonArchived(savefile.FileName);               
-                MessageBox.Show("Lưu thành công", "Lưu danh sách", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                IsSaved = true;
-
-                ctISave.Enabled = false;
+                if (luckyDrawController.SavePersonArchived(savefile.FileName))
+                {
+                    MessageBox.Show("Lưu thành công", "Lưu danh sách", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    IsSaved = true;
+                    ctISave.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi xảy ra.", "Lưu danh sách", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             return IsSaved;
