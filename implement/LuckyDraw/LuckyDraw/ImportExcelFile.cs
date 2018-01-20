@@ -7,7 +7,6 @@ namespace LuckyDraw
 {
     public class ImportExcelFile
     {
-        public Range Range;
         public Application Application;
         public Workbook Workbook;
         public Worksheet Worksheet;
@@ -15,79 +14,42 @@ namespace LuckyDraw
 
         public ImportExcelFile(string path)
         {
-            //Path = path;
             Path = path;
-        }
-
-        private bool InitializeReadFile()
-        {
-            try
-            {
-                Application = new Application();
-                Workbook = Application.Workbooks.Open(Path, 0, true, 5, "", "", true, XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
-                Worksheet = (Worksheet)Workbook.Worksheets.get_Item(1);
-                Range = Worksheet.UsedRange;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private bool InitializeSaveFile()
-        {
-            try
-            {
-                object misValue = System.Reflection.Missing.Value;
-                Application = new Application();
-                Workbook = Application.Workbooks.Add(misValue);
-                Worksheet = (Worksheet)Workbook.Worksheets.get_Item(1);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-
-        private void Realease()
-        {
-            Workbook.Close(true, null, null);
-            Application.Quit();
-
-            Marshal.ReleaseComObject(Worksheet);
-            Marshal.ReleaseComObject(Workbook);
-            Marshal.ReleaseComObject(Application);
         }
 
         public List<Person> GetPeople()
         {
             var people = new List<Person>();
-
-            if (!InitializeReadFile())
+            try
+            {
+                Application = new Application();
+                Workbook = Application.Workbooks.Open(Path, 0, true, 5, "", "", true, XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+                Worksheet = (Worksheet)Workbook.Worksheets.get_Item(1);
+            }
+            catch
             {
                 return people;
             }
-
-            var totalRows = Range.Rows.Count;
+            
+            var range = Worksheet.UsedRange;
+            
+            var totalRows = range.Rows.Count;
             for (var row = 2; row <= totalRows; row++)
             {
-                string attendeeIdAsString;
+                string attendeeId;
                 string attendeeName;
                 string attendeeInfor;
                 try
                 {
-                    attendeeIdAsString = (string)(Range.Cells[row, 1] as Range).Value2.ToString();
-                    attendeeName = (string)(Range.Cells[row, 2] as Range).Value2.ToString();
-                    attendeeInfor = (string)(Range.Cells[row, 3] as Range).Value2.ToString();
+                    attendeeId = (string)(range.Cells[row, 1] as Range).Value2.ToString();
+                    attendeeName = (string)(range.Cells[row, 2] as Range).Value2.ToString();
+                    attendeeInfor = (string)(range.Cells[row, 3] as Range).Value2.ToString();
 
-                    if (!people.Any(a => a.Id == attendeeIdAsString))
+                    if (!people.Any(a => a.Id == attendeeId))
                     {
                         people.Add(new Person
                         {
-                            Id = attendeeIdAsString,
+                            Id = attendeeId,
                             Name = attendeeName,
                             Info = attendeeInfor,
                             AwardName = string.Empty
@@ -99,34 +61,59 @@ namespace LuckyDraw
                 }
             }
 
-            Realease();
+            Workbook.Close(true, null, null);
+            Application.Quit();
+            ReleaseComObject(Worksheet, Workbook, Application);
 
             return people;
         }
 
-        public bool SaveAward(List<Person> personList, string savePath)
+        public bool SaveAward(List<Person> personList)
         {
-
-            Worksheet.Cells[1, 1] = "ID";
-            Worksheet.Cells[1, 2] = "Name";
-            Worksheet.Cells[1, 3] = "Infor";
-            Worksheet.Cells[1, 4] = "Award";
-
             if (personList == null) return false;
-            
 
+            try
+            {
+                object misValue = System.Reflection.Missing.Value;
+                Application = new Application();
+                Workbook = Application.Workbooks.Add(misValue);
+                Worksheet = (Worksheet)Workbook.Worksheets.get_Item(1);
 
+                Worksheet.Cells[1, 1] = "ID";
+                Worksheet.Cells[1, 2] = "NAME";
+                Worksheet.Cells[1, 3] = "INFOR";
+                Worksheet.Cells[1, 4] = "AWARD";
 
+                if (personList.Any())
+                {
+                    for (var i = 0; i < personList.Count; i++)
+                    {
+                        Worksheet.Cells[i + 2, 1] = personList[i].Id;
+                        Worksheet.Cells[i + 2, 2] = personList[i].Name;
+                        Worksheet.Cells[i + 2, 3] = personList[i].Info;
+                        Worksheet.Cells[i + 2, 4] = personList[i].AwardName;
+                    }
+                }
 
+                Workbook.SaveAs(Path, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                Workbook.Close(true, misValue, misValue);
+                Application.Quit();
 
-            //xlWorkBook.SaveAs("d:\\csharp-Excel.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-            //xlWorkBook.Close(true, misValue, misValue);
-            //xlApp.Quit();
+                ReleaseComObject(Worksheet, Workbook, Application);
 
-            //Marshal.ReleaseComObject(xlWorkSheet);
-            //Marshal.ReleaseComObject(xlWorkBook);
-            //Marshal.ReleaseComObject(xlApp);
-            return true;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void ReleaseComObject(Worksheet worksheet, Workbook workbook, Application application)
+        {
+            Marshal.ReleaseComObject(worksheet);
+            Marshal.ReleaseComObject(workbook);
+            Marshal.ReleaseComObject(application);
         }
     }
 }

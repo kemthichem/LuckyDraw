@@ -24,7 +24,8 @@ namespace LuckyDraw
         }
         public bool SaveListPersonToDatabase(List<Person> personList, string savePath)
         {
-            return true;
+            var importExcelFile = new ImportExcelFile(savePath);
+            return importExcelFile.SaveAward(personList);
         }
     }
 }
