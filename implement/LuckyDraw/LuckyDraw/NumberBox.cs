@@ -125,7 +125,7 @@ namespace LuckyDraw
             else if (mIsStopping)
             {
                 mYPosText += mVeloc * mDirection;
-                Debug.WriteLine("mYPosText: " + mYPosText.ToString());
+                //Debug.WriteLine("mYPosText: " + mYPosText.ToString());
                 float standardY = (mBoxSize.Height - mFontSize.Height) / 2;
                 if ((1 == mDirection && mYPosText > standardY)||
                     (-1 == mDirection && mYPosText < standardY))

@@ -379,13 +379,14 @@
             this.btDial.Enabled = false;
             this.btDial.FlatAppearance.BorderSize = 0;
             this.btDial.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btDial.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDial.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDial.ForeColor = System.Drawing.Color.Yellow;
             this.btDial.Location = new System.Drawing.Point(428, 399);
             this.btDial.Name = "btDial";
             this.btDial.Size = new System.Drawing.Size(288, 62);
             this.btDial.TabIndex = 10;
             this.btDial.Text = "QUAY SỐ";
+            this.btDial.UseCompatibleTextRendering = true;
             this.btDial.UseVisualStyleBackColor = true;
             this.btDial.Click += new System.EventHandler(this.btDial_Click);
             // 

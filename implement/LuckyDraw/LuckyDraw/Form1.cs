@@ -67,6 +67,8 @@ namespace LuckyDraw
                 pnControl.Visible = false;
                 ctIBack.Enabled = true;
                 btDial.Enabled = true;
+                lbPersonInfo.Visible = false;
+                lbPersonName.Visible = false;
 
                 lbCurAward.Text = luckyDrawController.GetCurAwardName();
             }
