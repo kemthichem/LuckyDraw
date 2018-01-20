@@ -81,14 +81,14 @@ namespace LuckyDraw
 
                 Worksheet.Cells[1, 1] = "ID";
                 Worksheet.Cells[1, 2] = "NAME";
-                Worksheet.Cells[1, 3] = "INFOR";
+                Worksheet.Cells[1, 3] = "INFO";
                 Worksheet.Cells[1, 4] = "AWARD";
 
                 if (personList.Any())
                 {
                     for (var i = 0; i < personList.Count; i++)
                     {
-                        Worksheet.Cells[i + 2, 1] = personList[i].Id;
+                        Worksheet.Cells[i + 2, 1] = "'" + personList[i].Id;
                         Worksheet.Cells[i + 2, 2] = personList[i].Name;
                         Worksheet.Cells[i + 2, 3] = personList[i].Info;
                         Worksheet.Cells[i + 2, 4] = personList[i].AwardName;
