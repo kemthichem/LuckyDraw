@@ -144,8 +144,7 @@ namespace LuckyDraw
                 PersonList.RemoveAt(index);
 
                 PersonArchivedID = archivedPerson.Id;
-                HasDataToSave = true;
-
+                HasDataToSave = true;                
                 return PersonArchivedID;
             }
 

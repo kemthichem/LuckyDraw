@@ -78,7 +78,7 @@ namespace LuckyDraw
 
         private void ctIList_Click(object sender, EventArgs e)
         {
-            ListAwardsFrm frm2 = new ListAwardsFrm(luckyDrawController.PersonArchivedList);
+            ListAwardsFrm frm2 = new ListAwardsFrm(this, luckyDrawController.PersonArchivedList, luckyDrawController.PersonArchivedID);
             frm2.ShowDialog();
         }
 
@@ -92,8 +92,11 @@ namespace LuckyDraw
                 //tmDeltaTime.Stop();
 
                 Person person = luckyDrawController.GetPersonArchived();
-                lbPersonName.Text = person.Name;
-                lbPersonInfo.Text = person.Info;
+                if (person != null)
+                {
+                    lbPersonName.Text = person.Name;
+                    lbPersonInfo.Text = person.Info;
+                }
                 lbPersonInfo.Visible = true;
                 lbPersonName.Visible = true;
                 lbCurAward.Text = luckyDrawController.GetCurAwardName();
@@ -155,10 +158,7 @@ namespace LuckyDraw
 
         private void ctISave_Click(object sender, EventArgs e)
         {
-            if (SaveArchivedPerson())
-            {
-                ctISave.Enabled = false;
-            }
+            SaveArchivedPerson();
         }
 
         private void ctIExit_Click(object sender, EventArgs e)
@@ -187,7 +187,7 @@ namespace LuckyDraw
             return IsToBack;
         }
 
-        private bool SaveArchivedPerson()
+        public bool SaveArchivedPerson()
         {
             bool IsSaved = false;
 
@@ -202,6 +202,8 @@ namespace LuckyDraw
                 luckyDrawController.SavePersonArchived(savefile.FileName);               
                 MessageBox.Show("Lưu thành công", "Lưu danh sách", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 IsSaved = true;
+
+                ctISave.Enabled = false;
             }
 
             return IsSaved;
@@ -310,35 +312,9 @@ namespace LuckyDraw
             }
         }
 
-        private void pbDisplayInfo_Paint(object sender, PaintEventArgs e)
-        {
-
-            e.Graphics.Clear(Color.Transparent);
-            Person person = luckyDrawController.GetPersonArchived();
-
-            StringFormat drawFormat = new System.Drawing.StringFormat();
-            Font drawFont = new Font("Segoe UI Semibold", 120, FontStyle.Bold);
-            Brush drawBrush = new SolidBrush(System.Drawing.Color.Gray);
-
-            float Y = 10;
-            float X = 0;// pbDisplayInfo.Width / 2;
-            SizeF size = e.Graphics.MeasureString(person.Name, drawFont);
-            //draw name            
-
-            X -= size.Width / 2;
-            e.Graphics.DrawString(person.Name, drawFont, drawBrush, X, Y);
-
-            //draw info
-            Y += size.Height;
-            X = 0;// pbDisplayInfo.Width / 2;
-            size = e.Graphics.MeasureString(person.Info, drawFont);
-            e.Graphics.DrawString(person.Info, drawFont, drawBrush, X, Y);
-        }
-
         private void lbPersonName_VisibleChanged(object sender, EventArgs e)
-        {
-            
-            lbPersonName.Location = new Point ((this.Width - lbPersonName.Width)/2, 500);
+        {            
+            lbPersonName.Location = new Point ((this.Width - lbPersonName.Width)/2, 470);
         }
 
         private void lbPersonInfo_VisibleChanged(object sender, EventArgs e)
