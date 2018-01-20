@@ -36,6 +36,11 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\library\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Award.cs" />
+    <Compile Include="ImportExcelFile.cs" />
     <Compile Include="LuckyDrawData.cs" />
     <Compile Include="ExtendGraphics.cs" />
     <Compile Include="ListAwardsFrm.cs">
@@ -108,8 +114,6 @@
     <None Include="Resources\Picture1.jpg" />
     <None Include="Resources\border.png" />
     <None Include="Resources\button.png" />
-    <Content Include="luckydraw.ico" />
-    <None Include="Resources\Image1.bmp" />
     <Content Include="Resources\imageBox.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
