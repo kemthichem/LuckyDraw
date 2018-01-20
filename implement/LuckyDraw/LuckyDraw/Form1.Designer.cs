@@ -301,6 +301,7 @@
             this.tbDatabase.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbDatabase.Location = new System.Drawing.Point(201, 137);
             this.tbDatabase.Name = "tbDatabase";
+            this.tbDatabase.ReadOnly = true;
             this.tbDatabase.Size = new System.Drawing.Size(304, 20);
             this.tbDatabase.TabIndex = 8;
             // 

@@ -13,9 +13,9 @@ namespace LuckyDraw
     public partial class ListAwardsFrm : Form
     {
         private List<Person> list;
-        private int curId;
+        private string curId;
         private Form1 mainFrm;
-        public ListAwardsFrm(Form1 form, List<Person> list, int id)
+        public ListAwardsFrm(Form1 form, List<Person> list, string id)
         {
             mainFrm = form;
             this.list = list;

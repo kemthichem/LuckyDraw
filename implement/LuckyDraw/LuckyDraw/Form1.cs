@@ -55,13 +55,13 @@ namespace LuckyDraw
             if (userClickedOK == DialogResult.OK)
             {
                 this.tbDatabase.Text = openFileDialog1.FileName;
+                luckyDrawController.LoadDataBase(this.tbDatabase.Text);
             }
         }
 
 
         private void btStart_Click(object sender, EventArgs e)
-        {
-            luckyDrawController.LoadDataBase(this.tbAwardName.Text);
+        {            
             if (luckyDrawController.StartLucky())
             {
                 pnControl.Visible = false;

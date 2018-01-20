@@ -44,14 +44,12 @@ namespace LuckyDraw
                     attendeeIdAsString = (string)(Range.Cells[row, 1] as Range).Value2.ToString();
                     attendeeName = (string)(Range.Cells[row, 2] as Range).Value2.ToString();
                     attendeeInfor = (string)(Range.Cells[row, 3] as Range).Value2.ToString();
-                    int attendee;
-                    int.TryParse(attendeeIdAsString, out attendee);
 
-                    if (!people.Any(a => a.Id == attendee))
+                    if (!people.Any(a => a.Id == attendeeIdAsString))
                     {
                         people.Add(new Person
                         {
-                            Id = attendee,
+                            Id = attendeeIdAsString,
                             Name = attendeeName,
                             Info = attendeeInfor,
                             AwardName = string.Empty
@@ -66,11 +64,6 @@ namespace LuckyDraw
             Realease();
 
             return people;
-        }
-
-        public int GetNumberOfPeople()
-        {
-            return GetPeople().Max(a => a.Id);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace LuckyDraw
 {
     class LuckyDrawController
     {
-        const int INVALID_ID = -1;
+        const string INVALID_ID = "-1";
 
         public bool IsDialing;
         public List<Person> PersonList;
@@ -17,7 +17,10 @@ namespace LuckyDraw
         LuckyDrawData luckyDrawData;
 
         public int CurrentAwardID;
-        public int PersonArchivedID;
+        public string PersonArchivedID;
+
+        public List<Person> PersonListBackup { get; set; }
+        public bool HasDataToSave { get; set; }
 
         public LuckyDrawController()
         {
@@ -30,7 +33,7 @@ namespace LuckyDraw
             AwardList.Add(new Award(1, "Giải 2"));
             AwardList.Add(new Award(2, "Giải 3"));
             this.CurrentAwardID = 0;
-            PersonArchivedID = -INVALID_ID;
+            PersonArchivedID = INVALID_ID;
             PersonArchivedList = new List<Person>();
             PersonList = new List<Person>();
         }
@@ -144,19 +147,21 @@ namespace LuckyDraw
                 PersonList.RemoveAt(index);
 
                 PersonArchivedID = archivedPerson.Id;
-                HasDataToSave = true;                
-                return PersonArchivedID;
+                HasDataToSave = true;
+
+                int dialedNum = 0;
+                Int32.TryParse(PersonArchivedID, out dialedNum);
+                return dialedNum;
             }
 
-            return INVALID_ID;            
+            return 0;            
         }
 
         public void LoadDataBase(string path)
         {
-            luckyDrawData = new LuckyDrawData("");
+            luckyDrawData = new LuckyDrawData(path);
             PersonList = luckyDrawData.GetListPersonFormDatabase();
-            //Hard-code
-
+            PersonListBackup = new List<Person>(PersonList);
         }
 
 
@@ -208,7 +213,8 @@ namespace LuckyDraw
 
         internal void Reset()
         {
-            PersonList.Clear();
+            PersonList = PersonListBackup;
+            HasDataToSave = false;
             PersonArchivedList.Clear();
 
             for (int i = 0; i < AwardList.Count; i++)
@@ -225,9 +231,7 @@ namespace LuckyDraw
             }
 
             return false;
-        }
-
-        public bool HasDataToSave { get; set; }
+        }        
 
         internal void SavePersonArchived(string savePath)
         {
@@ -236,5 +240,6 @@ namespace LuckyDraw
                 HasDataToSave = false;
             }
         }
+
     }
 }
