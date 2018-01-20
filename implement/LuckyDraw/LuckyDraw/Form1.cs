@@ -177,7 +177,7 @@ namespace LuckyDraw
             // set a default file name
             savefile.FileName = "Danh_sach_trung_giai.xls";
             // set filters - this can be done in properties as well
-            savefile.Filter = "Excel files|*.xls;";
+            savefile.Filter = "Excel 97-2003 file|*.xls|Excel file|*.xlsx";
 
             if (savefile.ShowDialog() == DialogResult.OK)
             {
@@ -301,12 +301,12 @@ namespace LuckyDraw
 
         private void lbPersonName_VisibleChanged(object sender, EventArgs e)
         {            
-            lbPersonName.Location = new Point ((this.Width - lbPersonName.Width)/2, 470);
+            lbPersonName.Location = new Point ((this.Width - lbPersonName.Width)/2, btDial.Location.Y + 100);
         }
 
         private void lbPersonInfo_VisibleChanged(object sender, EventArgs e)
         {
-            lbPersonInfo.Location = new Point((this.Width - lbPersonInfo.Width) / 2, 570);
+            lbPersonInfo.Location = new Point((this.Width - lbPersonInfo.Width) / 2, lbPersonName.Location.Y + 100);
         }
 
         private void lbPersonName_Click(object sender, EventArgs e)
