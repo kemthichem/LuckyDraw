@@ -177,7 +177,7 @@ namespace LuckyDraw
             // set a default file name
             savefile.FileName = "Danh_sach_trung_giai.xls";
             // set filters - this can be done in properties as well
-            savefile.Filter = "Excel files|*.xls;*.xlsx";
+            savefile.Filter = "Excel files|*.xls;";
 
             if (savefile.ShowDialog() == DialogResult.OK)
             {
