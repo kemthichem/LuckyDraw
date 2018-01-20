@@ -22,6 +22,7 @@ namespace LuckyDraw
         public LuckyDrawController()
         {
             IsDialing = false;
+            HasDataToSave = false;
 
             //init award list
             AwardList = new List<Award>();
@@ -111,7 +112,7 @@ namespace LuckyDraw
             return "Giải thưởng";
         }
 
-        public bool StartLucky()
+        public bool StardDial()
         {
             if (PersonList.Count > 0)
             {
@@ -130,7 +131,7 @@ namespace LuckyDraw
                 award.PlusOne();
             }
         }
-        public int Dial()
+        public int StopDial()
         {
             IsDialing = false;
             if (PersonList.Count > 0)
@@ -142,8 +143,8 @@ namespace LuckyDraw
                 PersonArchivedList.Add(PersonList[index]);
                 PersonList.RemoveAt(index);
 
-                //will calculate
                 PersonArchivedID = archivedPerson.Id;
+                HasDataToSave = true;
 
                 return PersonArchivedID;
             }
@@ -151,44 +152,11 @@ namespace LuckyDraw
             return INVALID_ID;            
         }
 
-        public void Stop()
-        {
-            IsDialing = false;          
-        }
-
         public void LoadDataBase(string path)
         {
+            luckyDrawData = new LuckyDrawData("");
+            PersonList = luckyDrawData.GetListPersonFormDatabase();
             //Hard-code
-            PersonList = new List<Person>();
-            Person p1 = new Person();
-            p1.Id = 1;
-            p1.Name = "Huỳnh Văn Thân";
-            p1.Info = "GCS/ICT";
-            PersonList.Add(p1);
-
-            Person p2 = new Person();
-            p2.Id = 2;
-            p2.Name = "Lê Phước Thạch";
-            p2.Info = "GCS/EMB";
-            PersonList.Add(p2);
-
-            Person p3 = new Person();
-            p3.Id = 3;
-            p3.Name = "Lê Văn Sáng";
-            p3.Info = "TMA/EMB";
-            PersonList.Add(p3);
-
-            Person p4 = new Person();
-            p4.Id = 4;
-            p4.Name = "Trí Phạm";
-            p4.Info = "TMA/EMB1";
-            PersonList.Add(p4);
-
-            Person p5 = new Person();
-            p5.Id = 5;
-            p5.Name = "Nhật Linh";
-            p5.Info = "TMA/EMB2";
-            PersonList.Add(p5);
 
         }
 
@@ -224,6 +192,50 @@ namespace LuckyDraw
         {
             var p = PersonArchivedList.Find(e => e.Id == PersonArchivedID);
             return p;
+        }
+
+        internal bool IsAbleToBack()
+        {
+            if (HasDataToSave)
+            {
+                return false;
+            }
+            else
+            {
+                Reset();
+                return true;
+            }
+        }
+
+        internal void Reset()
+        {
+            PersonList.Clear();
+            PersonArchivedList.Clear();
+
+            for (int i = 0; i < AwardList.Count; i++)
+            {
+                AwardList[i].Count = 0;
+            }
+        }
+
+        internal bool StartLucky()
+        {
+            if (PersonList.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool HasDataToSave { get; set; }
+
+        internal void SavePersonArchived(string savePath)
+        {
+            if (luckyDrawData.SaveListPersonToDatabase(PersonArchivedList, savePath))
+            {
+                HasDataToSave = false;
+            }
         }
     }
 }

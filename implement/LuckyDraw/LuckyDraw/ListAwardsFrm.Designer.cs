@@ -49,28 +49,31 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(682, 376);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.Visible = false;
             // 
             // IdClm
             // 
+            this.IdClm.DataPropertyName = "Id";
             this.IdClm.HeaderText = "ID";
             this.IdClm.Name = "IdClm";
             this.IdClm.ReadOnly = true;
             // 
             // NameClm
             // 
+            this.NameClm.DataPropertyName = "Name";
             this.NameClm.HeaderText = "Tên";
             this.NameClm.Name = "NameClm";
             this.NameClm.ReadOnly = true;
             // 
             // InfoClm
             // 
+            this.InfoClm.DataPropertyName = "Info";
             this.InfoClm.HeaderText = "Thông tin";
             this.InfoClm.Name = "InfoClm";
             this.InfoClm.ReadOnly = true;
             // 
             // AwardClm
             // 
+            this.AwardClm.DataPropertyName = "AwardName";
             this.AwardClm.HeaderText = "Giải Thưởng";
             this.AwardClm.Name = "AwardClm";
             this.AwardClm.ReadOnly = true;
@@ -84,6 +87,7 @@
             this.Name = "ListAwardsFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ListAwardsFrm";
+            this.Load += new System.EventHandler(this.ListAwardsFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

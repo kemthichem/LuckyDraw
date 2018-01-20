@@ -12,9 +12,16 @@ namespace LuckyDraw
 {
     public partial class ListAwardsFrm : Form
     {
-        public ListAwardsFrm()
+        private List<Person> list;
+        public ListAwardsFrm(List<Person> list)
         {
+            this.list = list;
             InitializeComponent();
+        }
+
+        private void ListAwardsFrm_Load(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = this.list;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace LuckyDraw
     class SerialNumber
     {
         //Attributes
-        private bool isDialing;
         private int NumberOfBox;
 
         //graphic
@@ -24,7 +23,6 @@ namespace LuckyDraw
         public SerialNumber(int numberOfBox)
         {
             NumberOfBox = numberOfBox;
-            isDialing = false;
 
             mListNumberBox = new List<NumberBox>();
 
@@ -104,7 +102,6 @@ namespace LuckyDraw
 
         public void Start()
         {
-            isDialing = true;
             for (int i = 0; i < mListNumberBox.Count; i++)
             {
                 mListNumberBox[i].Start();

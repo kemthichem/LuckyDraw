@@ -91,7 +91,7 @@
             this.ctIBack,
             this.ctIExit});
             this.ctMainForm.Name = "ctMainForm";
-            this.ctMainForm.Size = new System.Drawing.Size(204, 98);
+            this.ctMainForm.Size = new System.Drawing.Size(204, 120);
             // 
             // ctIList
             // 
@@ -107,6 +107,7 @@
             this.ctISave.Name = "ctISave";
             this.ctISave.Size = new System.Drawing.Size(203, 22);
             this.ctISave.Text = "Lưu";
+            this.ctISave.Click += new System.EventHandler(this.ctISave_Click);
             // 
             // toolStripSeparator1
             // 
@@ -186,6 +187,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.ForeColor = System.Drawing.Color.Yellow;
             this.label5.Location = new System.Drawing.Point(201, 140);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 13);
@@ -208,6 +210,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.Color.Yellow;
             this.label1.Location = new System.Drawing.Point(201, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
@@ -263,6 +266,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.Color.Yellow;
             this.label3.Location = new System.Drawing.Point(201, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);

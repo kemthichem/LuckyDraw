@@ -8,10 +8,10 @@ namespace LuckyDraw
 {
     public class Person
     {
-        public int Id;
-        public string Name;
-        public string Info;
-        public string AwardName;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Info { get; set; }
+        public string AwardName { get; set; }
 
         public Person()
         {

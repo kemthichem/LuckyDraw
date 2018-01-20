@@ -55,29 +55,30 @@ namespace LuckyDraw
             if (userClickedOK == DialogResult.OK)
             {
                 this.tbDatabase.Text = openFileDialog1.FileName;
-
-                luckyDrawController.LoadDataBase(this.tbAwardName.Text);
             }
         }
 
-        private void ctIExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
         private void btStart_Click(object sender, EventArgs e)
         {
-            //luckyDrawController.StartLucky();
-            pnControl.Visible = false;
-            ctIBack.Enabled = true;
-            btDial.Enabled = true;
+            luckyDrawController.LoadDataBase(this.tbAwardName.Text);
+            if (luckyDrawController.StartLucky())
+            {
+                pnControl.Visible = false;
+                ctIBack.Enabled = true;
+                btDial.Enabled = true;
 
-            lbCurAward.Text = luckyDrawController.GetCurAwardName();
+                lbCurAward.Text = luckyDrawController.GetCurAwardName();
+            }
+            else
+            {
+                MessageBox.Show("Danh sách trống. Hãy chọn cơ sở dữ liệu.", "Bắt đầu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void ctIList_Click(object sender, EventArgs e)
         {
-            ListAwardsFrm frm2 = new ListAwardsFrm();
+            ListAwardsFrm frm2 = new ListAwardsFrm(luckyDrawController.PersonArchivedList);
             frm2.ShowDialog();
         }
 
@@ -85,9 +86,9 @@ namespace LuckyDraw
         {
             if (luckyDrawController.IsDialing)
             {
-                int dialNumber = luckyDrawController.Dial();
+                int personID = luckyDrawController.StopDial();
 
-                serialNumber.Stop(dialNumber);
+                serialNumber.Stop(personID);
                 //tmDeltaTime.Stop();
 
                 Person person = luckyDrawController.GetPersonArchived();
@@ -102,10 +103,16 @@ namespace LuckyDraw
 
                 if (luckyDrawController.PersonList.Count == 0)
                     btDial.Enabled = false;
+                if (luckyDrawController.HasDataToSave)
+                {
+                    ctIList.Enabled = true;
+                    ctISave.Enabled = true;
+                }
+
             }
             else
             {
-                if (luckyDrawController.StartLucky())
+                if (luckyDrawController.StardDial())
                 {
                     serialNumber.Start();
                     tmDeltaTime.Start();                    
@@ -115,15 +122,8 @@ namespace LuckyDraw
 
                     lbPersonInfo.Visible = false;
                     lbPersonName.Visible = false;
-                }
-                //else
-                //{
-                //    serialNumber.Reset();
-                //    btDial.Enabled = false;
-
-                //    MessageBox.Show("Danh sách trống. Vui lòng chọn cơ sở dữ liệu.", "Quay số", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //    backToControl();
-                //}               
+                    
+                }          
             }
         }
 
@@ -131,16 +131,80 @@ namespace LuckyDraw
         {
             pnControl.Visible = true;
             ctIBack.Enabled = false;
+            ctISave.Enabled = false;
+            ctIList.Enabled = false;
             btDial.Enabled = false;
 
             lbPersonInfo.Visible = false;
             lbPersonName.Visible = true;
 
             lbPersonName.Text = "Tên-Bộ Phận";
+            lbCurAward.Text = luckyDrawController.GetCurAwardName();
         }
+
         private void ctIBack_Click(object sender, EventArgs e)
         {
-            backToControl();
+            if (luckyDrawController.IsAbleToBack() || ConfirmToSaveArchivedPerson())
+            {
+                luckyDrawController.Reset();                                
+                serialNumber.Reset();
+                backToControl();
+            }            
+        }
+
+
+        private void ctISave_Click(object sender, EventArgs e)
+        {
+            if (SaveArchivedPerson())
+            {
+                ctISave.Enabled = false;
+            }
+        }
+
+        private void ctIExit_Click(object sender, EventArgs e)
+        {
+            if (luckyDrawController.IsAbleToBack() || ConfirmToSaveArchivedPerson())
+            {
+                luckyDrawController.Reset();
+                serialNumber.Reset();
+                Application.Exit();
+            } 
+            
+        }
+
+        private bool ConfirmToSaveArchivedPerson()
+        {
+            bool IsToBack = true;
+            DialogResult rs = MessageBox.Show("Danh sách trúng giải chưa được lưu.\n Bạn có muốn lưu không?", "Quay về", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (rs == DialogResult.Yes)
+            {
+                if (SaveArchivedPerson() == false)
+                {
+                    IsToBack = false;
+                }
+            }
+
+            return IsToBack;
+        }
+
+        private bool SaveArchivedPerson()
+        {
+            bool IsSaved = false;
+
+            SaveFileDialog savefile = new SaveFileDialog();
+            // set a default file name
+            savefile.FileName = "Danh_sach_trung_giai.xls";
+            // set filters - this can be done in properties as well
+            savefile.Filter = "Excel files|*.xls;*.xlsx";
+
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
+                luckyDrawController.SavePersonArchived(savefile.FileName);               
+                MessageBox.Show("Lưu thành công", "Lưu danh sách", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                IsSaved = true;
+            }
+
+            return IsSaved;
         }
 
         private void btNextAward_Click(object sender, EventArgs e)
@@ -293,6 +357,7 @@ namespace LuckyDraw
                 }
             }
         }
+
 
     }
 }
