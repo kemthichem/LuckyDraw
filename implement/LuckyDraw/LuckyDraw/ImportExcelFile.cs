@@ -44,7 +44,8 @@ namespace LuckyDraw
                     attendeeIdAsString = (string)(Range.Cells[row, 1] as Range).Value2.ToString();
                     attendeeName = (string)(Range.Cells[row, 2] as Range).Value2.ToString();
                     attendeeInfor = (string)(Range.Cells[row, 3] as Range).Value2.ToString();
-                    int.TryParse(attendeeIdAsString, out int attendee);
+                    int attendee;
+                    int.TryParse(attendeeIdAsString, out attendee);
 
                     if (!people.Any(a => a.Id == attendee))
                     {
