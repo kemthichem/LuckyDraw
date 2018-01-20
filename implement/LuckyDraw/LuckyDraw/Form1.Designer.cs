@@ -139,9 +139,9 @@
             this.btNextAward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btNextAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btNextAward.ForeColor = System.Drawing.Color.Yellow;
-            this.btNextAward.Location = new System.Drawing.Point(690, 37);
+            this.btNextAward.Location = new System.Drawing.Point(686, 37);
             this.btNextAward.Name = "btNextAward";
-            this.btNextAward.Size = new System.Drawing.Size(26, 44);
+            this.btNextAward.Size = new System.Drawing.Size(39, 44);
             this.btNextAward.TabIndex = 20;
             this.btNextAward.Text = ">";
             this.btNextAward.UseVisualStyleBackColor = false;
@@ -155,9 +155,9 @@
             this.btPreAward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btPreAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btPreAward.ForeColor = System.Drawing.Color.Yellow;
-            this.btPreAward.Location = new System.Drawing.Point(450, 37);
+            this.btPreAward.Location = new System.Drawing.Point(434, 37);
             this.btPreAward.Name = "btPreAward";
-            this.btPreAward.Size = new System.Drawing.Size(26, 44);
+            this.btPreAward.Size = new System.Drawing.Size(39, 44);
             this.btPreAward.TabIndex = 22;
             this.btPreAward.Text = "<";
             this.btPreAward.UseVisualStyleBackColor = false;

@@ -130,7 +130,6 @@
             this.AwardClm.HeaderText = "Giải Thưởng";
             this.AwardClm.Name = "AwardClm";
             this.AwardClm.ReadOnly = true;
-            this.AwardClm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // ListAwardsFrm
             // 
