@@ -60,7 +60,6 @@ namespace LuckyDraw
             //draw image            
             // Draw using this
             PointF drawP = convertToGlobal(mDrawPos.X , mDrawPos.Y);
-
             if (isBlur)
                 g.DrawImage(mBackgroundBlurBm, drawP.X, drawP.Y);
             else
@@ -115,7 +114,7 @@ namespace LuckyDraw
                 mValue = ++mValue % 10;
 
 
-                mVeloc = Utilities.genRandomeNumber(50, 120);
+                mVeloc = Utilities.genRandomeNumber(10, 120);
                 mYPosText += mVeloc;
                 if (mYPosText > max)
                 {

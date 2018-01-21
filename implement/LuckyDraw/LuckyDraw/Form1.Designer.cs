@@ -60,6 +60,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btDial = new System.Windows.Forms.Button();
             this.tmDisplayInfo = new System.Windows.Forms.Timer(this.components);
+            this.lbLoadingDb = new System.Windows.Forms.Label();
             this.ctMainForm.SuspendLayout();
             this.pnControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -167,6 +168,7 @@
             // 
             this.pnControl.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pnControl.BackColor = System.Drawing.Color.Transparent;
+            this.pnControl.Controls.Add(this.lbLoadingDb);
             this.pnControl.Controls.Add(this.tbAwardName);
             this.pnControl.Controls.Add(this.label5);
             this.pnControl.Controls.Add(this.btEdit);
@@ -209,9 +211,9 @@
             // btEdit
             // 
             this.btEdit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btEdit.Location = new System.Drawing.Point(479, 15);
+            this.btEdit.Location = new System.Drawing.Point(480, 15);
             this.btEdit.Name = "btEdit";
-            this.btEdit.Size = new System.Drawing.Size(26, 23);
+            this.btEdit.Size = new System.Drawing.Size(26, 20);
             this.btEdit.TabIndex = 4;
             this.btEdit.Text = ">";
             this.btEdit.UseVisualStyleBackColor = true;
@@ -232,9 +234,9 @@
             // btBgImage
             // 
             this.btBgImage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btBgImage.Location = new System.Drawing.Point(516, 91);
+            this.btBgImage.Location = new System.Drawing.Point(516, 94);
             this.btBgImage.Name = "btBgImage";
-            this.btBgImage.Size = new System.Drawing.Size(26, 23);
+            this.btBgImage.Size = new System.Drawing.Size(26, 20);
             this.btBgImage.TabIndex = 7;
             this.btBgImage.Text = "...";
             this.btBgImage.UseVisualStyleBackColor = true;
@@ -243,9 +245,9 @@
             // btRemove
             // 
             this.btRemove.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btRemove.Location = new System.Drawing.Point(516, 15);
+            this.btRemove.Location = new System.Drawing.Point(515, 15);
             this.btRemove.Name = "btRemove";
-            this.btRemove.Size = new System.Drawing.Size(26, 23);
+            this.btRemove.Size = new System.Drawing.Size(26, 20);
             this.btRemove.TabIndex = 5;
             this.btRemove.Text = "x";
             this.btRemove.UseVisualStyleBackColor = true;
@@ -254,9 +256,9 @@
             // btOpenDatabase
             // 
             this.btOpenDatabase.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btOpenDatabase.Location = new System.Drawing.Point(516, 134);
+            this.btOpenDatabase.Location = new System.Drawing.Point(516, 137);
             this.btOpenDatabase.Name = "btOpenDatabase";
-            this.btOpenDatabase.Size = new System.Drawing.Size(26, 23);
+            this.btOpenDatabase.Size = new System.Drawing.Size(26, 20);
             this.btOpenDatabase.TabIndex = 9;
             this.btOpenDatabase.Text = "...";
             this.btOpenDatabase.UseVisualStyleBackColor = true;
@@ -288,9 +290,9 @@
             // btAdd
             // 
             this.btAdd.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btAdd.Location = new System.Drawing.Point(442, 15);
+            this.btAdd.Location = new System.Drawing.Point(445, 15);
             this.btAdd.Name = "btAdd";
-            this.btAdd.Size = new System.Drawing.Size(26, 23);
+            this.btAdd.Size = new System.Drawing.Size(26, 20);
             this.btAdd.TabIndex = 3;
             this.btAdd.Text = "+";
             this.btAdd.UseVisualStyleBackColor = true;
@@ -395,6 +397,19 @@
             this.tmDisplayInfo.Interval = 1200;
             this.tmDisplayInfo.Tick += new System.EventHandler(this.tmDisplayInfo_Tick);
             // 
+            // lbLoadingDb
+            // 
+            this.lbLoadingDb.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lbLoadingDb.AutoSize = true;
+            this.lbLoadingDb.BackColor = System.Drawing.Color.Transparent;
+            this.lbLoadingDb.ForeColor = System.Drawing.Color.Yellow;
+            this.lbLoadingDb.Location = new System.Drawing.Point(548, 139);
+            this.lbLoadingDb.Name = "lbLoadingDb";
+            this.lbLoadingDb.Size = new System.Drawing.Size(98, 13);
+            this.lbLoadingDb.TabIndex = 20;
+            this.lbLoadingDb.Text = "Đang đọc dữ liệu...";
+            this.lbLoadingDb.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -458,6 +473,7 @@
         private System.Windows.Forms.Label lbPersonName;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Timer tmDisplayInfo;
+        private System.Windows.Forms.Label lbLoadingDb;
 
     }
 }

@@ -16,7 +16,6 @@ namespace LuckyDraw
         private int NumberOfBox;
 
         //graphic
-        private Color mBgColor;
 
         private List<NumberBox> mListNumberBox;
 
@@ -25,9 +24,6 @@ namespace LuckyDraw
             NumberOfBox = numberOfBox;
 
             mListNumberBox = new List<NumberBox>();
-
-            mBgColor = Color.FromArgb(0, 12, 12, 12);
-
 
             for (int i = 0; i < numberOfBox; i++)
             {
@@ -86,7 +82,6 @@ namespace LuckyDraw
 
             Bitmap transparentBm = Properties.Resources.transparent;
             g.DrawImage(transparentBm, g.ClipBounds);
-
 
             DrawBorder(g);
 

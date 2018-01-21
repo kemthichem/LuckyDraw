@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LuckyDraw
@@ -36,6 +37,7 @@ namespace LuckyDraw
             PersonArchivedID = INVALID_ID;
             PersonArchivedList = new List<Person>();
             PersonList = new List<Person>();
+            PersonListBackup = new List<Person>();
         }
 
         private int IncreaseIDAward()
@@ -157,14 +159,20 @@ namespace LuckyDraw
             return 0;            
         }
 
-        public void LoadDataBase(string path)
+        public void LoadDBFunc(EndLoadDatabaseDl finishLoadDb, string path)
         {
             luckyDrawData = new LuckyDrawData(path);
             PersonList = luckyDrawData.GetListPersonFormDatabase();
-            PersonListBackup = new List<Person>(PersonList);
+            PersonListBackup.AddRange(PersonList);
+            finishLoadDb();
         }
-
-
+        public void LoadDataBase(EndLoadDatabaseDl finishLoadDb, string path)
+        {
+            Person p =new Person();
+            Thread newThread = new Thread(() => LoadDBFunc(finishLoadDb, path));
+            newThread.Start();            
+        }
+        
         public void NextAward()
         {
             int index = AwardList.FindIndex(e => e.ID == CurrentAwardID);
@@ -213,7 +221,8 @@ namespace LuckyDraw
 
         internal void Reset()
         {
-            PersonList = PersonListBackup;
+            PersonList.Clear();
+            PersonList.AddRange(PersonListBackup);
             HasDataToSave = false;
             PersonArchivedList.Clear();
 

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace LuckyDraw
 {
+    delegate void EndLoadDatabaseDl();
     public partial class Form1 : Form
     {
         SerialNumber serialNumber;
@@ -55,11 +56,30 @@ namespace LuckyDraw
             if (userClickedOK == DialogResult.OK)
             {
                 this.tbDatabase.Text = openFileDialog1.FileName;
-                luckyDrawController.LoadDataBase(this.tbDatabase.Text);
+                EndLoadDatabaseDl end = new EndLoadDatabaseDl(EndLoadDatabase);
+                luckyDrawController.LoadDataBase(end, this.tbDatabase.Text);
+                lbLoadingDb.Visible = true;
+                btStart.Enabled = false;
             }
         }
 
-
+        private void EndLoadDatabase()
+        {
+            if (lbLoadingDb.InvokeRequired == false)
+            {
+                lbLoadingDb.Visible = false;
+                btStart.Enabled = true; 
+            }
+            else
+            {
+                // Show progress asynchronously
+                EndLoadDatabaseDl dl = new EndLoadDatabaseDl(EndLoadDatabase);
+                //Invoke(dl);
+                BeginInvoke(dl);
+            }
+            
+        }
+        
         private void btStart_Click(object sender, EventArgs e)
         {            
             if (luckyDrawController.StartLucky())
@@ -347,7 +367,5 @@ namespace LuckyDraw
 
             tmDisplayInfo.Stop();
         }
-
-
     }
 }
