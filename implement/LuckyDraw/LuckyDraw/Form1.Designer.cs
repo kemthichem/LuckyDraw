@@ -41,6 +41,7 @@
             this.btNextAward = new System.Windows.Forms.Button();
             this.btPreAward = new System.Windows.Forms.Button();
             this.pnControl = new System.Windows.Forms.Panel();
+            this.lbLoadingDb = new System.Windows.Forms.Label();
             this.tbAwardName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btEdit = new System.Windows.Forms.Button();
@@ -57,13 +58,12 @@
             this.lbPersonInfo = new System.Windows.Forms.Label();
             this.lbPersonName = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbSerialNumber = new System.Windows.Forms.PictureBox();
             this.btDial = new System.Windows.Forms.Button();
             this.tmDisplayInfo = new System.Windows.Forms.Timer(this.components);
-            this.lbLoadingDb = new System.Windows.Forms.Label();
             this.ctMainForm.SuspendLayout();
             this.pnControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSerialNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // tmDeltaTime
@@ -77,7 +77,7 @@
             this.lbCurAward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbCurAward.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCurAward.ForeColor = System.Drawing.Color.Yellow;
-            this.lbCurAward.Location = new System.Drawing.Point(473, 37);
+            this.lbCurAward.Location = new System.Drawing.Point(455, 37);
             this.lbCurAward.Name = "lbCurAward";
             this.lbCurAward.Size = new System.Drawing.Size(218, 44);
             this.lbCurAward.TabIndex = 15;
@@ -140,7 +140,7 @@
             this.btNextAward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btNextAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btNextAward.ForeColor = System.Drawing.Color.Yellow;
-            this.btNextAward.Location = new System.Drawing.Point(686, 37);
+            this.btNextAward.Location = new System.Drawing.Point(668, 37);
             this.btNextAward.Name = "btNextAward";
             this.btNextAward.Size = new System.Drawing.Size(39, 44);
             this.btNextAward.TabIndex = 20;
@@ -156,7 +156,7 @@
             this.btPreAward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btPreAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btPreAward.ForeColor = System.Drawing.Color.Yellow;
-            this.btPreAward.Location = new System.Drawing.Point(434, 37);
+            this.btPreAward.Location = new System.Drawing.Point(416, 37);
             this.btPreAward.Name = "btPreAward";
             this.btPreAward.Size = new System.Drawing.Size(39, 44);
             this.btPreAward.TabIndex = 22;
@@ -187,6 +187,19 @@
             this.pnControl.Name = "pnControl";
             this.pnControl.Size = new System.Drawing.Size(833, 169);
             this.pnControl.TabIndex = 24;
+            // 
+            // lbLoadingDb
+            // 
+            this.lbLoadingDb.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lbLoadingDb.AutoSize = true;
+            this.lbLoadingDb.BackColor = System.Drawing.Color.Transparent;
+            this.lbLoadingDb.ForeColor = System.Drawing.Color.Yellow;
+            this.lbLoadingDb.Location = new System.Drawing.Point(548, 139);
+            this.lbLoadingDb.Name = "lbLoadingDb";
+            this.lbLoadingDb.Size = new System.Drawing.Size(98, 13);
+            this.lbLoadingDb.TabIndex = 20;
+            this.lbLoadingDb.Text = "Đang đọc dữ liệu...";
+            this.lbLoadingDb.Visible = false;
             // 
             // tbAwardName
             // 
@@ -362,16 +375,16 @@
             this.lbPersonName.VisibleChanged += new System.EventHandler(this.lbPersonName_VisibleChanged);
             this.lbPersonName.Click += new System.EventHandler(this.lbPersonName_Click);
             // 
-            // pictureBox1
+            // pbSerialNumber
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(177, 82);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(840, 304);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pbSerialNumber.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pbSerialNumber.BackColor = System.Drawing.Color.Transparent;
+            this.pbSerialNumber.Location = new System.Drawing.Point(137, 82);
+            this.pbSerialNumber.Name = "pbSerialNumber";
+            this.pbSerialNumber.Size = new System.Drawing.Size(840, 304);
+            this.pbSerialNumber.TabIndex = 13;
+            this.pbSerialNumber.TabStop = false;
+            this.pbSerialNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.pbSerialNumber_Paint);
             // 
             // btDial
             // 
@@ -383,7 +396,7 @@
             this.btDial.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btDial.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDial.ForeColor = System.Drawing.Color.Yellow;
-            this.btDial.Location = new System.Drawing.Point(428, 399);
+            this.btDial.Location = new System.Drawing.Point(417, 399);
             this.btDial.Name = "btDial";
             this.btDial.Size = new System.Drawing.Size(288, 62);
             this.btDial.TabIndex = 10;
@@ -394,21 +407,8 @@
             // 
             // tmDisplayInfo
             // 
-            this.tmDisplayInfo.Interval = 1200;
+            this.tmDisplayInfo.Interval = 1000;
             this.tmDisplayInfo.Tick += new System.EventHandler(this.tmDisplayInfo_Tick);
-            // 
-            // lbLoadingDb
-            // 
-            this.lbLoadingDb.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.lbLoadingDb.AutoSize = true;
-            this.lbLoadingDb.BackColor = System.Drawing.Color.Transparent;
-            this.lbLoadingDb.ForeColor = System.Drawing.Color.Yellow;
-            this.lbLoadingDb.Location = new System.Drawing.Point(548, 139);
-            this.lbLoadingDb.Name = "lbLoadingDb";
-            this.lbLoadingDb.Size = new System.Drawing.Size(98, 13);
-            this.lbLoadingDb.TabIndex = 20;
-            this.lbLoadingDb.Text = "Đang đọc dữ liệu...";
-            this.lbLoadingDb.Visible = false;
             // 
             // Form1
             // 
@@ -423,7 +423,7 @@
             this.Controls.Add(this.btPreAward);
             this.Controls.Add(this.btNextAward);
             this.Controls.Add(this.lbCurAward);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbSerialNumber);
             this.Controls.Add(this.btDial);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -435,7 +435,7 @@
             this.ctMainForm.ResumeLayout(false);
             this.pnControl.ResumeLayout(false);
             this.pnControl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSerialNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -443,7 +443,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbSerialNumber;
         private System.Windows.Forms.Timer tmDeltaTime;
         private System.Windows.Forms.Label lbCurAward;
         private System.Windows.Forms.ContextMenuStrip ctMainForm;

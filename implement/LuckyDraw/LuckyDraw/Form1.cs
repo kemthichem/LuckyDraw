@@ -22,13 +22,13 @@ namespace LuckyDraw
             InitializeComponent();
 
             tmDeltaTime.Interval = 30;
-            serialNumber = new SerialNumber(4);
+            serialNumber = new SerialNumber();
 
             luckyDrawController = new LuckyDrawController();
 
         }
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private void pbSerialNumber_Paint(object sender, PaintEventArgs e)
         {
             serialNumber.Draw(e.Graphics);
         }
@@ -36,7 +36,7 @@ namespace LuckyDraw
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            pictureBox1.Invalidate();
+            pbSerialNumber.Invalidate();
         }
 
         private void btOpenDatabase_Click(object sender, EventArgs e)
@@ -68,7 +68,12 @@ namespace LuckyDraw
             if (lbLoadingDb.InvokeRequired == false)
             {
                 lbLoadingDb.Visible = false;
-                btStart.Enabled = true; 
+                btStart.Enabled = true;
+
+                //set serial number
+                int widthOfPb = serialNumber.ChangeNumberBox(luckyDrawController.GetMaxNumberCharacterId());
+                pbSerialNumber.Width = widthOfPb;
+                pbSerialNumber.Location = new Point((this.Width - pbSerialNumber.Width) / 2, pbSerialNumber.Location.Y);
             }
             else
             {

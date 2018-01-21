@@ -158,21 +158,21 @@ namespace LuckyDraw
 
             return 0;            
         }
-
         public void LoadDBFunc(EndLoadDatabaseDl finishLoadDb, string path)
         {
             luckyDrawData = new LuckyDrawData(path);
             PersonList = luckyDrawData.GetListPersonFormDatabase();
             PersonListBackup.AddRange(PersonList);
+
+            GetMaxNumberCharacterId();
             finishLoadDb();
         }
         public void LoadDataBase(EndLoadDatabaseDl finishLoadDb, string path)
         {
-            Person p =new Person();
+            Person p = new Person();
             Thread newThread = new Thread(() => LoadDBFunc(finishLoadDb, path));
-            newThread.Start();            
-        }
-        
+            newThread.Start();
+        }        
         public void NextAward()
         {
             int index = AwardList.FindIndex(e => e.ID == CurrentAwardID);
@@ -181,10 +181,8 @@ namespace LuckyDraw
             {
                 index %= AwardList.Count;
                 CurrentAwardID = AwardList[index].ID;
-            }
-            
+            }            
         }
-
         public void PreAward()
         {
             int index = AwardList.FindIndex(e => e.ID == CurrentAwardID);
@@ -251,6 +249,17 @@ namespace LuckyDraw
             }
 
             return false;
+        }
+
+        internal int GetMaxNumberCharacterId()
+        {
+            int max = 0;
+            if (PersonList.Count > 0)
+            {
+                max = PersonList.Max(e => e.Id.Length);
+            }
+
+            return max;
         }
 
     }

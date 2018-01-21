@@ -12,28 +12,47 @@ namespace LuckyDraw
 {
     class SerialNumber
     {
+        const int MIN_NUMBOX = 4;
+        const int WIDTH_IMAGE = 180;
+        const int OFFSET = 20;
+        const int MARGIN_ONE_SIDE = 30;
         //Attributes
         private int NumberOfBox;
+
+
+        int FullWidth;
+        int InsideWidth;
 
         //graphic
 
         private List<NumberBox> mListNumberBox;
 
-        public SerialNumber(int numberOfBox)
+        public SerialNumber()
         {
-            NumberOfBox = numberOfBox;
-
             mListNumberBox = new List<NumberBox>();
+            ChangeNumberBox(MIN_NUMBOX);           
+        }
+        public int ChangeNumberBox(int numberOfBox)
+        {
+            mListNumberBox.Clear();
 
-            for (int i = 0; i < numberOfBox; i++)
+            this.NumberOfBox = numberOfBox < MIN_NUMBOX ? MIN_NUMBOX : numberOfBox;
+
+            for (int i = 0; i < NumberOfBox; i++)
             {
-                Point p = new Point(200 * i, 0);
+                Point p = new Point((WIDTH_IMAGE + OFFSET) * i, 0);
                 PointF margin = new PointF(30, 28);
 
                 NumberBox nb = new NumberBox(p, margin);
                 mListNumberBox.Add(nb);
             }
+
+            //full width
+            InsideWidth = (NumberOfBox * WIDTH_IMAGE) + (NumberOfBox - 1) * 20;
+            FullWidth = InsideWidth + MARGIN_ONE_SIDE * 2;
+            return FullWidth;
         }
+
         private void DrawBorder(Graphics g)
         {
             const float xradius = 10;
@@ -42,8 +61,8 @@ namespace LuckyDraw
             // Top rectangle.
 
             RectangleF rect = new RectangleF(
-                2, 2,
-                836,
+                1.5F, 1.5F,
+                FullWidth - (1.5F * 2),
                 300);
 
             g.InterpolationMode = InterpolationMode.HighQualityBilinear;
@@ -61,7 +80,7 @@ namespace LuckyDraw
 
             RectangleF rect1 = new RectangleF(
                 15, 15,
-                810,
+                FullWidth - (15*2),
                 274);
             using (Pen pen = new Pen(Color.DarkSlateBlue, 0))
             {
@@ -77,9 +96,6 @@ namespace LuckyDraw
         public void Draw(Graphics g)
         {
             //g.Clear()
-            //g.DrawImage()
-            //Draw border
-
             Bitmap transparentBm = Properties.Resources.transparent;
             g.DrawImage(transparentBm, g.ClipBounds);
 
@@ -88,7 +104,7 @@ namespace LuckyDraw
             //draw number
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-            g.SetClip(new Rectangle(30, 28, 780, 248));
+            g.SetClip(new Rectangle(MARGIN_ONE_SIDE, 28, InsideWidth, 250));
             for (int i = 0; i < mListNumberBox.Count; i++)
             {
                 mListNumberBox[i].Draw(g);
