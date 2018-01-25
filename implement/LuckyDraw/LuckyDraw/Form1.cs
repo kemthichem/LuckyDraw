@@ -20,7 +20,7 @@ namespace LuckyDraw
         public Form1()
         {
             InitializeComponent();
-
+            this.AcceptButton = btDial;
             tmDeltaTime.Interval = Utilities.INTERVAL_DRAW_TIME;
             serialNumber = new SerialNumber();
 
