@@ -8,6 +8,7 @@ namespace LuckyDraw
 {
     class Utilities
     {
+        public const int INTERVAL_DRAW_TIME = 20;
         static public int genRandomeNumber(int min, int max)
         {
             Random r = new Random(DateTime.Now.Millisecond);

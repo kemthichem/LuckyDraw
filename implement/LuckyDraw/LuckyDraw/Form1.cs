@@ -21,7 +21,7 @@ namespace LuckyDraw
         {
             InitializeComponent();
 
-            tmDeltaTime.Interval = 30;
+            tmDeltaTime.Interval = Utilities.INTERVAL_DRAW_TIME;
             serialNumber = new SerialNumber();
 
             luckyDrawController = new LuckyDrawController();

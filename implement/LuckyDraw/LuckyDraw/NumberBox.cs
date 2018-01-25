@@ -93,7 +93,7 @@ namespace LuckyDraw
             mDirection = (mYPosText > standardY) ? -1 : 1;
             float distance = Math.Abs(mYPosText - standardY);
 
-            mVeloc = (distance / mTimeToEnd) * 30 * 2.0F;
+            mVeloc = (distance / mTimeToEnd) * Utilities.INTERVAL_DRAW_TIME * 2.0F;
             mValue = value;
 
             mIsDialing = false;
@@ -114,7 +114,7 @@ namespace LuckyDraw
                 mValue = ++mValue % 10;
 
 
-                mVeloc = Utilities.genRandomeNumber(10, 120);
+                mVeloc = Utilities.genRandomeNumber(70, 150);
                 mYPosText += mVeloc;
                 if (mYPosText > max)
                 {
