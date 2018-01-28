@@ -61,9 +61,12 @@
             this.pbSerialNumber = new System.Windows.Forms.PictureBox();
             this.btDial = new System.Windows.Forms.Button();
             this.tmDisplayInfo = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.ctMainForm.SuspendLayout();
             this.pnControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSerialNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tmDeltaTime
@@ -81,7 +84,7 @@
             this.lbCurAward.Name = "lbCurAward";
             this.lbCurAward.Size = new System.Drawing.Size(218, 44);
             this.lbCurAward.TabIndex = 15;
-            this.lbCurAward.Text = "Giải thưởng";
+            this.lbCurAward.Text = "GIẢI THƯỞNG";
             this.lbCurAward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbCurAward.UseCompatibleTextRendering = true;
             // 
@@ -183,9 +186,9 @@
             this.pnControl.Controls.Add(this.cbAward);
             this.pnControl.Controls.Add(this.tbBgImage);
             this.pnControl.ForeColor = System.Drawing.Color.Black;
-            this.pnControl.Location = new System.Drawing.Point(207, 623);
+            this.pnControl.Location = new System.Drawing.Point(243, 623);
             this.pnControl.Name = "pnControl";
-            this.pnControl.Size = new System.Drawing.Size(833, 169);
+            this.pnControl.Size = new System.Drawing.Size(797, 169);
             this.pnControl.TabIndex = 24;
             // 
             // lbLoadingDb
@@ -194,7 +197,7 @@
             this.lbLoadingDb.AutoSize = true;
             this.lbLoadingDb.BackColor = System.Drawing.Color.Transparent;
             this.lbLoadingDb.ForeColor = System.Drawing.Color.Yellow;
-            this.lbLoadingDb.Location = new System.Drawing.Point(548, 139);
+            this.lbLoadingDb.Location = new System.Drawing.Point(530, 139);
             this.lbLoadingDb.Name = "lbLoadingDb";
             this.lbLoadingDb.Size = new System.Drawing.Size(98, 13);
             this.lbLoadingDb.TabIndex = 20;
@@ -204,7 +207,7 @@
             // tbAwardName
             // 
             this.tbAwardName.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbAwardName.Location = new System.Drawing.Point(201, 15);
+            this.tbAwardName.Location = new System.Drawing.Point(183, 15);
             this.tbAwardName.Name = "tbAwardName";
             this.tbAwardName.Size = new System.Drawing.Size(235, 20);
             this.tbAwardName.TabIndex = 0;
@@ -215,7 +218,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.ForeColor = System.Drawing.Color.Yellow;
-            this.label5.Location = new System.Drawing.Point(201, 121);
+            this.label5.Location = new System.Drawing.Point(183, 121);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 13);
             this.label5.TabIndex = 19;
@@ -224,7 +227,7 @@
             // btEdit
             // 
             this.btEdit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btEdit.Location = new System.Drawing.Point(480, 15);
+            this.btEdit.Location = new System.Drawing.Point(462, 15);
             this.btEdit.Name = "btEdit";
             this.btEdit.Size = new System.Drawing.Size(26, 20);
             this.btEdit.TabIndex = 4;
@@ -238,7 +241,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.Yellow;
-            this.label1.Location = new System.Drawing.Point(201, -1);
+            this.label1.Location = new System.Drawing.Point(183, -1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 0;
@@ -247,7 +250,7 @@
             // btBgImage
             // 
             this.btBgImage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btBgImage.Location = new System.Drawing.Point(516, 94);
+            this.btBgImage.Location = new System.Drawing.Point(498, 94);
             this.btBgImage.Name = "btBgImage";
             this.btBgImage.Size = new System.Drawing.Size(26, 20);
             this.btBgImage.TabIndex = 7;
@@ -258,7 +261,7 @@
             // btRemove
             // 
             this.btRemove.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btRemove.Location = new System.Drawing.Point(515, 15);
+            this.btRemove.Location = new System.Drawing.Point(497, 15);
             this.btRemove.Name = "btRemove";
             this.btRemove.Size = new System.Drawing.Size(26, 20);
             this.btRemove.TabIndex = 5;
@@ -269,7 +272,7 @@
             // btOpenDatabase
             // 
             this.btOpenDatabase.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btOpenDatabase.Location = new System.Drawing.Point(516, 137);
+            this.btOpenDatabase.Location = new System.Drawing.Point(498, 137);
             this.btOpenDatabase.Name = "btOpenDatabase";
             this.btOpenDatabase.Size = new System.Drawing.Size(26, 20);
             this.btOpenDatabase.TabIndex = 9;
@@ -280,7 +283,7 @@
             // btStart
             // 
             this.btStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStart.Location = new System.Drawing.Point(760, 134);
+            this.btStart.Location = new System.Drawing.Point(724, 134);
             this.btStart.Name = "btStart";
             this.btStart.Size = new System.Drawing.Size(58, 23);
             this.btStart.TabIndex = 11;
@@ -294,7 +297,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.ForeColor = System.Drawing.Color.Yellow;
-            this.label3.Location = new System.Drawing.Point(201, 75);
+            this.label3.Location = new System.Drawing.Point(183, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
             this.label3.TabIndex = 2;
@@ -303,7 +306,7 @@
             // btAdd
             // 
             this.btAdd.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btAdd.Location = new System.Drawing.Point(445, 15);
+            this.btAdd.Location = new System.Drawing.Point(427, 15);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(26, 20);
             this.btAdd.TabIndex = 3;
@@ -314,7 +317,7 @@
             // tbDatabase
             // 
             this.tbDatabase.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbDatabase.Location = new System.Drawing.Point(201, 137);
+            this.tbDatabase.Location = new System.Drawing.Point(183, 137);
             this.tbDatabase.Name = "tbDatabase";
             this.tbDatabase.ReadOnly = true;
             this.tbDatabase.Size = new System.Drawing.Size(304, 20);
@@ -325,7 +328,7 @@
             this.cbAward.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cbAward.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAward.FormattingEnabled = true;
-            this.cbAward.Location = new System.Drawing.Point(201, 43);
+            this.cbAward.Location = new System.Drawing.Point(183, 43);
             this.cbAward.Name = "cbAward";
             this.cbAward.Size = new System.Drawing.Size(341, 21);
             this.cbAward.TabIndex = 2;
@@ -334,7 +337,7 @@
             // tbBgImage
             // 
             this.tbBgImage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbBgImage.Location = new System.Drawing.Point(201, 94);
+            this.tbBgImage.Location = new System.Drawing.Point(183, 94);
             this.tbBgImage.Name = "tbBgImage";
             this.tbBgImage.ReadOnly = true;
             this.tbBgImage.Size = new System.Drawing.Size(304, 20);
@@ -410,6 +413,30 @@
             this.tmDisplayInfo.Interval = 1000;
             this.tmDisplayInfo.Tick += new System.EventHandler(this.tmDisplayInfo_Tick);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(223, 64);
+            this.pictureBox1.TabIndex = 28;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Yellow;
+            this.label4.Location = new System.Drawing.Point(9, 759);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(283, 17);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Designed by Dat Viet Teambuilding && Event";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -417,6 +444,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(32)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1117, 788);
             this.ContextMenuStrip = this.ctMainForm;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbPersonInfo);
             this.Controls.Add(this.lbPersonName);
             this.Controls.Add(this.pnControl);
@@ -436,6 +465,7 @@
             this.pnControl.ResumeLayout(false);
             this.pnControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSerialNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -474,6 +504,8 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Timer tmDisplayInfo;
         private System.Windows.Forms.Label lbLoadingDb;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label4;
 
     }
 }

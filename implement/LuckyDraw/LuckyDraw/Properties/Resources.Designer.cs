@@ -83,6 +83,16 @@ namespace LuckyDraw.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap datviet {
+            get {
+                object obj = ResourceManager.GetObject("datviet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap imageBlur {
             get {
                 object obj = ResourceManager.GetObject("imageBlur", resourceCulture);
