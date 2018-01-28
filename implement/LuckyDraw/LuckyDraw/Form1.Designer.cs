@@ -75,12 +75,12 @@
             // 
             // lbCurAward
             // 
-            this.lbCurAward.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbCurAward.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbCurAward.BackColor = System.Drawing.Color.SlateBlue;
             this.lbCurAward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbCurAward.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCurAward.ForeColor = System.Drawing.Color.Yellow;
-            this.lbCurAward.Location = new System.Drawing.Point(455, 37);
+            this.lbCurAward.Location = new System.Drawing.Point(455, 42);
             this.lbCurAward.Name = "lbCurAward";
             this.lbCurAward.Size = new System.Drawing.Size(218, 44);
             this.lbCurAward.TabIndex = 15;
@@ -137,13 +137,13 @@
             // 
             // btNextAward
             // 
-            this.btNextAward.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btNextAward.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btNextAward.BackColor = System.Drawing.Color.SlateBlue;
             this.btNextAward.FlatAppearance.BorderSize = 0;
             this.btNextAward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btNextAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btNextAward.ForeColor = System.Drawing.Color.Yellow;
-            this.btNextAward.Location = new System.Drawing.Point(668, 37);
+            this.btNextAward.Location = new System.Drawing.Point(668, 42);
             this.btNextAward.Name = "btNextAward";
             this.btNextAward.Size = new System.Drawing.Size(39, 44);
             this.btNextAward.TabIndex = 20;
@@ -153,13 +153,13 @@
             // 
             // btPreAward
             // 
-            this.btPreAward.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btPreAward.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btPreAward.BackColor = System.Drawing.Color.SlateBlue;
             this.btPreAward.FlatAppearance.BorderSize = 0;
             this.btPreAward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btPreAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btPreAward.ForeColor = System.Drawing.Color.Yellow;
-            this.btPreAward.Location = new System.Drawing.Point(416, 37);
+            this.btPreAward.Location = new System.Drawing.Point(416, 42);
             this.btPreAward.Name = "btPreAward";
             this.btPreAward.Size = new System.Drawing.Size(39, 44);
             this.btPreAward.TabIndex = 22;
@@ -380,9 +380,9 @@
             // 
             // pbSerialNumber
             // 
-            this.pbSerialNumber.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pbSerialNumber.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pbSerialNumber.BackColor = System.Drawing.Color.Transparent;
-            this.pbSerialNumber.Location = new System.Drawing.Point(137, 82);
+            this.pbSerialNumber.Location = new System.Drawing.Point(137, 87);
             this.pbSerialNumber.Name = "pbSerialNumber";
             this.pbSerialNumber.Size = new System.Drawing.Size(840, 304);
             this.pbSerialNumber.TabIndex = 13;
@@ -391,7 +391,7 @@
             // 
             // btDial
             // 
-            this.btDial.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btDial.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btDial.BackColor = System.Drawing.Color.Transparent;
             this.btDial.BackgroundImage = global::LuckyDraw.Properties.Resources.button;
             this.btDial.Enabled = false;
@@ -399,7 +399,7 @@
             this.btDial.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btDial.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDial.ForeColor = System.Drawing.Color.Yellow;
-            this.btDial.Location = new System.Drawing.Point(417, 399);
+            this.btDial.Location = new System.Drawing.Point(417, 403);
             this.btDial.Name = "btDial";
             this.btDial.Size = new System.Drawing.Size(288, 62);
             this.btDial.TabIndex = 10;
