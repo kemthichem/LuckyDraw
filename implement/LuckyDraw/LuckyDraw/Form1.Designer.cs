@@ -61,12 +61,9 @@
             this.pbSerialNumber = new System.Windows.Forms.PictureBox();
             this.btDial = new System.Windows.Forms.Button();
             this.tmDisplayInfo = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.ctMainForm.SuspendLayout();
             this.pnControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSerialNumber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tmDeltaTime
@@ -352,7 +349,7 @@
             this.lbPersonInfo.ForeColor = System.Drawing.Color.Yellow;
             this.lbPersonInfo.Location = new System.Drawing.Point(12, 465);
             this.lbPersonInfo.Name = "lbPersonInfo";
-            this.lbPersonInfo.Size = new System.Drawing.Size(337, 101);
+            this.lbPersonInfo.Size = new System.Drawing.Size(325, 101);
             this.lbPersonInfo.TabIndex = 27;
             this.lbPersonInfo.Text = "Thông tin";
             this.lbPersonInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -370,7 +367,7 @@
             this.lbPersonName.ForeColor = System.Drawing.Color.Yellow;
             this.lbPersonName.Location = new System.Drawing.Point(392, 465);
             this.lbPersonName.Name = "lbPersonName";
-            this.lbPersonName.Size = new System.Drawing.Size(437, 101);
+            this.lbPersonName.Size = new System.Drawing.Size(422, 101);
             this.lbPersonName.TabIndex = 26;
             this.lbPersonName.Text = "Tên-Bộ Phận";
             this.lbPersonName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -413,30 +410,6 @@
             this.tmDisplayInfo.Interval = 1000;
             this.tmDisplayInfo.Tick += new System.EventHandler(this.tmDisplayInfo_Tick);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(223, 64);
-            this.pictureBox1.TabIndex = 28;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Yellow;
-            this.label4.Location = new System.Drawing.Point(9, 759);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(283, 17);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "Designed by Dat Viet Teambuilding && Event";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,8 +418,6 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1117, 788);
             this.ContextMenuStrip = this.ctMainForm;
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbPersonInfo);
             this.Controls.Add(this.lbPersonName);
             this.Controls.Add(this.pnControl);
@@ -466,7 +437,6 @@
             this.pnControl.ResumeLayout(false);
             this.pnControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSerialNumber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -505,8 +475,6 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Timer tmDisplayInfo;
         private System.Windows.Forms.Label lbLoadingDb;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label4;
 
     }
 }
