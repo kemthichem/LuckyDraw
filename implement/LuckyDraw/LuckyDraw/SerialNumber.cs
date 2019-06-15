@@ -3,22 +3,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace LuckyDraw
 {
     class SerialNumber
     {
-        const int MIN_NUMBOX = 4;
-        const int WIDTH_IMAGE = 180;
+        const int MIN_NUMBOX = 1;
+        const int WIDTH_IMAGE = 1200;
         const int OFFSET = 20;
         const int MARGIN_ONE_SIDE = 30;
         //Attributes
         private int NumberOfBox;
-
 
         int FullWidth;
         int InsideWidth;
@@ -32,6 +28,15 @@ namespace LuckyDraw
             mListNumberBox = new List<NumberBox>();
             ChangeNumberBox(MIN_NUMBOX);           
         }
+
+        public void initRandomValueList()
+        {
+            for (int i = 0; i < mListNumberBox.Count; i++)
+            {
+                //mListNumberBox[i].
+            }
+
+        }
         public int ChangeNumberBox(int numberOfBox)
         {
             mListNumberBox.Clear();
@@ -42,13 +47,14 @@ namespace LuckyDraw
             {
                 Point p = new Point((WIDTH_IMAGE + OFFSET) * i, 0);
                 PointF margin = new PointF(30, 28);
+                Size boxSize = new Size(WIDTH_IMAGE, 248);
 
-                NumberBox nb = new NumberBox(p, margin);
+                NumberBox nb = new NumberBox(p, margin, boxSize);
                 mListNumberBox.Add(nb);
             }
 
             //full width
-            InsideWidth = (NumberOfBox * WIDTH_IMAGE) + (NumberOfBox - 1) * 20;
+            InsideWidth = (NumberOfBox * WIDTH_IMAGE) + (NumberOfBox - 1) * OFFSET;
             FullWidth = InsideWidth + MARGIN_ONE_SIDE * 2;
             return FullWidth;
         }
@@ -93,6 +99,14 @@ namespace LuckyDraw
 
         }
 
+        internal void SetRandomValList(List<string> candidateNameList)
+        {
+            for (int i = 0; i < mListNumberBox.Count; i++)
+            {
+                mListNumberBox[i].SetRandomValList(candidateNameList);
+            }
+        }
+
         public void Draw(Graphics g)
         {
             //g.Clear()
@@ -119,26 +133,34 @@ namespace LuckyDraw
             }
         }
 
-        public void Stop(int value)
+        public void Stop(string value)
         {
-            List<int> temp = new List<int>(this.NumberOfBox);
+            //         List<int> temp = new List<int>(this.NumberOfBox);
 
-            for (int i = this.NumberOfBox; i > 0; i--)
+            //         for (int i = this.NumberOfBox; i > 0; i--)
+            //         {
+            //             int deci = (int)Math.Pow(10, i - 1);
+            //             int val = value / deci;
+            //             value -= (val * deci);
+
+            //             temp.Add(val);
+            //         }
+
+
+            //         for (int i = 0; i < temp.Count; i++)
+            //{
+            //             if (i < mListNumberBox.Count)
+            //             {
+            //                 mListNumberBox[i].Stop(temp[i]);
+            //             }
+            //         }
+
+
+
+            for (int i = 0; i < mListNumberBox.Count; i++)
             {
-                int deci = (int)Math.Pow(10, i - 1);
-                int val = value / deci;
-                value -= (val * deci);
 
-                temp.Add(val);
-            }
-
-
-            for (int i = 0; i < temp.Count; i++)
-			{
-                if (i < mListNumberBox.Count)
-                {
-                    mListNumberBox[i].Stop(temp[i]);
-                }                
+                    mListNumberBox[i].Stop(value);
             }
         }
 

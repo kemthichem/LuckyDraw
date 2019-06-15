@@ -352,7 +352,7 @@
             this.lbPersonInfo.ForeColor = System.Drawing.Color.Yellow;
             this.lbPersonInfo.Location = new System.Drawing.Point(12, 465);
             this.lbPersonInfo.Name = "lbPersonInfo";
-            this.lbPersonInfo.Size = new System.Drawing.Size(337, 101);
+            this.lbPersonInfo.Size = new System.Drawing.Size(325, 101);
             this.lbPersonInfo.TabIndex = 27;
             this.lbPersonInfo.Text = "Thông tin";
             this.lbPersonInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -370,21 +370,23 @@
             this.lbPersonName.ForeColor = System.Drawing.Color.Yellow;
             this.lbPersonName.Location = new System.Drawing.Point(392, 465);
             this.lbPersonName.Name = "lbPersonName";
-            this.lbPersonName.Size = new System.Drawing.Size(437, 101);
+            this.lbPersonName.Size = new System.Drawing.Size(422, 101);
             this.lbPersonName.TabIndex = 26;
             this.lbPersonName.Text = "Tên-Bộ Phận";
             this.lbPersonName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbPersonName.UseCompatibleTextRendering = true;
+            this.lbPersonName.Visible = false;
             this.lbPersonName.VisibleChanged += new System.EventHandler(this.lbPersonName_VisibleChanged);
             this.lbPersonName.Click += new System.EventHandler(this.lbPersonName_Click);
             // 
             // pbSerialNumber
             // 
-            this.pbSerialNumber.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pbSerialNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbSerialNumber.BackColor = System.Drawing.Color.Transparent;
-            this.pbSerialNumber.Location = new System.Drawing.Point(137, 87);
+            this.pbSerialNumber.Location = new System.Drawing.Point(50, 87);
             this.pbSerialNumber.Name = "pbSerialNumber";
-            this.pbSerialNumber.Size = new System.Drawing.Size(840, 304);
+            this.pbSerialNumber.Size = new System.Drawing.Size(1200, 304);
             this.pbSerialNumber.TabIndex = 13;
             this.pbSerialNumber.TabStop = false;
             this.pbSerialNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.pbSerialNumber_Paint);

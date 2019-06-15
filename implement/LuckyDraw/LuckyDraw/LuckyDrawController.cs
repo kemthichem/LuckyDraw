@@ -106,6 +106,13 @@ namespace LuckyDraw
 
             return false;
         }
+
+        internal List<string> GetCandidateNameList()
+        {
+            var names = PersonList.Select(p => p.Name);
+            return names.ToList<string>();
+        }
+
         public string GetCurAwardName()
         {
             var award = AwardList.Find(e => e.ID == CurrentAwardID);
@@ -136,7 +143,7 @@ namespace LuckyDraw
                 award.PlusOne();
             }
         }
-        public int StopDial()
+        public string StopDial()
         {
             IsDialing = false;
             if (PersonList.Count > 0)
@@ -151,12 +158,12 @@ namespace LuckyDraw
                 PersonArchivedID = archivedPerson.Id;
                 HasDataToSave = true;
 
-                int dialedNum = 0;
-                Int32.TryParse(PersonArchivedID, out dialedNum);
-                return dialedNum;
+                //int dialedNum = 0;
+                //Int32.TryParse(PersonArchivedID, out dialedNum);
+                return archivedPerson.Name;
             }
 
-            return 0;            
+            return string.Empty;
         }
         public void LoadDBFunc(EndLoadDatabaseDl finishLoadDb, string path)
         {

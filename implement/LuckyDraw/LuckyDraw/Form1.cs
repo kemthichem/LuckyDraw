@@ -69,9 +69,13 @@ namespace LuckyDraw
             {
                 lbLoadingDb.Visible = false;
                 btStart.Enabled = true;
-
                 //set serial number
-                int widthOfPb = serialNumber.ChangeNumberBox(luckyDrawController.GetMaxNumberCharacterId());
+                //MaxNumberCharacterId is always is 1 for text
+                //int widthOfPb = serialNumber.ChangeNumberBox(luckyDrawController.GetMaxNumberCharacterId());
+                int widthOfPb = serialNumber.ChangeNumberBox(1);
+
+                List<string> candidateNameList = luckyDrawController.GetCandidateNameList();
+                serialNumber.SetRandomValList(candidateNameList);
                 pbSerialNumber.Width = widthOfPb;
                 pbSerialNumber.Location = new Point((this.Width - pbSerialNumber.Width) / 2, pbSerialNumber.Location.Y);
             }
@@ -113,8 +117,8 @@ namespace LuckyDraw
         {
             if (luckyDrawController.IsDialing)
             {
-                int personID = luckyDrawController.StopDial();
-                serialNumber.Stop(personID);
+                string personName = luckyDrawController.StopDial();
+                serialNumber.Stop(personName);
                 //tmDeltaTime.Stop();
                 btDial.Enabled = false;
                 tmDisplayInfo.Start();
@@ -146,7 +150,7 @@ namespace LuckyDraw
             btDial.Enabled = false;
 
             lbPersonInfo.Visible = false;
-            lbPersonName.Visible = true;
+            //lbPersonName.Visible = true;
 
             lbPersonName.Text = "Tên-Bộ Phận";
             lbCurAward.Text = luckyDrawController.GetCurAwardName();
@@ -354,8 +358,8 @@ namespace LuckyDraw
                 lbPersonName.Text = person.Name;
                 lbPersonInfo.Text = person.Info;
             }
-            lbPersonInfo.Visible = true;
-            lbPersonName.Visible = true;
+            //lbPersonInfo.Visible = true;
+            //lbPersonName.Visible = true;
             lbCurAward.Text = luckyDrawController.GetCurAwardName();
 
             btDial.Text = "QUAY SỐ";

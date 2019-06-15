@@ -21,9 +21,10 @@ namespace LuckyDraw
         private SizeF mFontSize;
         private Point mDrawPos;
         private float mYPosText;
-        private int mValue;
-
+        private string mValue;
         private long mTimeToEnd;
+
+        private List<string> mRandomValList;
         
         //graphics
         System.Drawing.Font drawFont;
@@ -32,18 +33,17 @@ namespace LuckyDraw
         Bitmap mBackgroundBlurBm;
 
         private const string SEGOE_UI_SEMIBOLD_FONT = "Segoe UI Semibold";
-        
+
         //method
-        public NumberBox(Point pos, PointF margin)
+        public NumberBox(Point pos, PointF margin, Size boxSize)
         {
             mDrawPos = pos;
             mMargin = margin;
             mYPosText = pos.Y;
 
-            mValue = Utilities.genRandomeNumber(0, 9);
-            mYPosText = Utilities.genRandomeNumber(-160, 240);
+            mYPosText = Utilities.genRandomeNumber(-160, 241);
 
-            drawFont = new System.Drawing.Font("Segoe UI Semibold", 120, FontStyle.Bold);
+            drawFont = new System.Drawing.Font("Segoe UI Semibold", 40, FontStyle.Bold);
             drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Gray);
             mBackgroundBm = Properties.Resources.imageBox;
             mBackgroundBlurBm = Properties.Resources.imageBlur;
@@ -51,24 +51,23 @@ namespace LuckyDraw
             mDirection = 1;
             mTimeToEnd = 800;
 
-            mBoxSize = new Size(180, 248);
+            mBoxSize = boxSize;
             mFontSize = mBoxSize;
+
+            mRandomValList = new List<string>();
+
+            mValue = string.Empty;
         }
 
         private void drawBGImage(Graphics g, bool isBlur)
         {
-            //draw image            
+            //draw image
             // Draw using this
             PointF drawP = convertToGlobal(mDrawPos.X , mDrawPos.Y);
             if (isBlur)
-                g.DrawImage(mBackgroundBlurBm, drawP.X, drawP.Y);
+                g.DrawImage(mBackgroundBlurBm, drawP.X, drawP.Y, drawP.X + mBoxSize.Width, drawP.Y + mBoxSize.Height);
             else
-                g.DrawImage(mBackgroundBm, drawP.X, drawP.Y);
-        }
-
-        private void drawNumber(Graphics g)
-        {
-
+                g.DrawImage(mBackgroundBm, drawP.X, drawP.Y, drawP.X + mBoxSize.Width, drawP.Y + mBoxSize.Height);
         }
 
         public void Start()
@@ -80,13 +79,13 @@ namespace LuckyDraw
             mDirection = 1;
         }
 
-        public void Stop(int value)
+        public void Stop(string value)
         {
             //change font
             drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
 
             float standardY = (mBoxSize.Height - mFontSize.Height)/2;
-            value = value % 10;
+            //value = value % 10;
 
             //calculate distance
             //calculate near 
@@ -99,7 +98,12 @@ namespace LuckyDraw
             mIsDialing = false;
             mIsStopping = true;
 }
-        
+
+        internal void SetRandomValList(List<string> candidateNameList)
+        {
+            mRandomValList = candidateNameList;
+        }
+
         public void Draw(Graphics g)
         {
 
@@ -111,10 +115,12 @@ namespace LuckyDraw
             {
                 drawBGImage(g, true);
 
-                mValue = ++mValue % 10;
+                int randomIndex = Utilities.genRandomeNumber(0, mRandomValList.Count);
+                if (randomIndex < mRandomValList.Count)
+                    mValue = mRandomValList[randomIndex];
+                //mValue = ++mValue % 10;
 
-
-                mVeloc = Utilities.genRandomeNumber(70, 150);
+                mVeloc = Utilities.genRandomeNumber(40, 50);
                 mYPosText += mVeloc;
                 if (mYPosText > max)
                 {
@@ -147,6 +153,7 @@ namespace LuckyDraw
 
             if (mIsDialing || mIsStopping)
             {
+                mFontSize = g.MeasureString(mValue, drawFont);
                 string drawString = mValue.ToString();
                 System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
                 PointF drawP = convertToGlobal(mDrawPos.X + (mBoxSize.Width - mFontSize.Width) / 2, mYPosText);
@@ -154,10 +161,9 @@ namespace LuckyDraw
             }
 
             //Pen pen = new Pen(drawBrush);
+
            // PointF drawR = convertToGlobal(mDrawPos.X + (mBoxSize.Width - mFontSize.Width) / 2, mYPosText);
            // g.DrawRectangle(pen, drawR.X, drawR.Y, mFontSize.Width, mFontSize.Height);
-
-            mFontSize = g.MeasureString("1", drawFont);
         }
 
         private PointF convertToGlobal(float X, float Y)
